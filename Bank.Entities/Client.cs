@@ -13,7 +13,7 @@ namespace Bank.Entities
 
         public string LastName { get; set; }
 
-        public int Pesel { get; set; }
+        public string Pesel { get; set; }
 
         public string Email { get; set; }
 
