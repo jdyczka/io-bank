@@ -5,7 +5,9 @@ namespace Bank.DataAccess
 {
     public class BankContext : DbContext
     {
-        //public BankContext() { }
+        public BankContext() : base("BankDB")
+        {
+        }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Card> Cards { get; set; }
