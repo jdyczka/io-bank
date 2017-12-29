@@ -9,10 +9,10 @@ namespace Bank.Entities
         public int ClientId { get; set; }
         public virtual Client Client { get; set; }
 
-        public int AccountNo { get; set; }
+        public string AccountNo { get; set; }
         public virtual Account Account { get; set; }
 
-        public int Pin { get; set; }
+        public string Pin { get; set; }
 
         public DateTime ExpirationDate { get; set; }
     }

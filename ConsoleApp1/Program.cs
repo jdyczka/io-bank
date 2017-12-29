@@ -12,8 +12,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<BankContext, Configuration>());
-
-            // custom initializer (always drops and recreates)
+            //custom initializer (always drops and recreates)
             Database.SetInitializer(new BankDBInitializer());
             GetClients();
         }

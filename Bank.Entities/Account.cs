@@ -10,7 +10,7 @@ namespace Bank.Entities
         private ICollection<Client> _clients;
 
         [Key]
-        public int AccountNo { get; set; }
+        public string AccountNo { get; set; }
         public string Name { get; set; }
         public DateTime DateOpened { get; set; }
         public DateTime DateClosed { get; set; }
