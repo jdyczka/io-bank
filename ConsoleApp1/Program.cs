@@ -27,8 +27,10 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine(client.FirstName);
                 }
+
+                Console.WriteLine("");
+                Console.WriteLine("End");
             }
-            Console.WriteLine("End");
         }
 
     }

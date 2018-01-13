@@ -35,10 +35,14 @@ namespace Bank.DataAccess
 
             var employees = new List<Employee>
             {
-                new Employee { Id=1, FirstName="Kamila",LastName="Laskowska",Pesel="62121012345", AddressId=3, AuthLevel=Entities.Enums.AuthLevel.Basic },
-                new Employee { Id=2, FirstName="Mariusz",LastName="Niewiadomski",Pesel="76020322556", AddressId=3, AuthLevel=Entities.Enums.AuthLevel.Basic},
-                new Employee { Id=3, FirstName="Olga",LastName="Pietrzak",Pesel="83120445589", AddressId=4, AuthLevel=Entities.Enums.AuthLevel.Limited},
-                new Employee { Id=4, FirstName="Robert",LastName="Sobański",Pesel="90050624587", AddressId=4, AuthLevel=Entities.Enums.AuthLevel.Admin}
+                new Employee { Id=1, FirstName="Kamila",LastName="Laskowska",Pesel="62121012345",
+                    AddressId =3, AuthLevel=Entities.Enums.AuthLevel.Basic, IsSuspended = false, Password = "kamila" },
+                new Employee { Id=2, FirstName="Mariusz",LastName="Niewiadomski",Pesel="76020322556",
+                    AddressId =3, AuthLevel=Entities.Enums.AuthLevel.Basic, IsSuspended = false, Password = "mariusz"},
+                new Employee { Id=3, FirstName="Olga",LastName="Pietrzak",Pesel="83120445589",
+                    AddressId =4, AuthLevel=Entities.Enums.AuthLevel.Limited, IsSuspended = false, Password = "olga"},
+                new Employee { Id=4, FirstName="Robert",LastName="Sobański",Pesel="90050624587",
+                    AddressId =4, AuthLevel=Entities.Enums.AuthLevel.Admin, IsSuspended = false, Password = "robert"}
 
             };
             context.Employees.AddOrUpdate(e => new { e.Id, e.FirstName, e.LastName, e.Pesel, e.AddressId }, employees.ToArray());

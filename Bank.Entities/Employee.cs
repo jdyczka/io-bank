@@ -16,5 +16,9 @@ namespace Bank.Entities
         public virtual Address Address { get; set; }
 
         public AuthLevel AuthLevel { get; set; }
+
+        public bool IsSuspended { get; set; }
+
+        public string Password { get; set; }
     }
 }
