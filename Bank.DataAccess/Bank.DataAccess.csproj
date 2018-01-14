@@ -52,8 +52,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\IClientRepository.cs" />
-    <Compile Include="Repositories\IEmplyeeRepository.cs" />
+    <Compile Include="Repositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\IMessageRepository.cs" />
   </ItemGroup>
   <ItemGroup>

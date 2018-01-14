@@ -10,7 +10,10 @@ namespace Bank.DataAccess.Repositories
 {
     public interface IEmployeeRepository
     {
-        IEnumerable getClientList();
+        IEnumerable getEmployeeList();
         Employee getEmployeeById(int id);
+        Employee getEmployeeByEmail(string email);
+        void addNewEmployee(Employee employee);
+        void updateEmployee(Employee employee);
     }
 }
