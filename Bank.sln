@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.DataAccess", "Bank.DataAccess\Bank.DataAccess.csproj", "{029C9BE5-5F82-44CF-B917-BCC3004C5B8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Entities", "Bank.Entities\Bank.Entities.csproj", "{1738E654-F821-42E5-B616-677E868323E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B97A98B5-2F2E-48C5-B54C-7DF29BAA09FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.MainWindow", "MainWindowClient\Bank.MainWindow.csproj", "{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +29,15 @@ Global
 		{B97A98B5-2F2E-48C5-B54C-7DF29BAA09FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97A98B5-2F2E-48C5-B54C-7DF29BAA09FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97A98B5-2F2E-48C5-B54C-7DF29BAA09FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13DFFC35-7063-48F5-BF21-A1FF7B4DD878}
 	EndGlobalSection
 EndGlobal

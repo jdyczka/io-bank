@@ -1,0 +1,40 @@
+﻿<Window x:Name="AddClient" x:Class="Bank.MainWindow.AddClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank.MainWindow"
+        mc:Ignorable="d"
+        Title="Dodawanie Klienta" Height="398" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="AddClientWindowElements">
+            <Label x:Name="FirstName" Content="Imię" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,0.752" />
+            <Label x:Name="LastName" Content="Nazwisko" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Email" Content="Adres email" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Pesel" Content="Numer pesel" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="PhoneNumber" Content="Numer telefonu" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Country" Content="Narodowość" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="City" Content="Miasto" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="PostalCode" Content="Kod pocztowy" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Street" Content="Ulica" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="BuildingNumber" Content="Numer ulicy" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="ApartamentNumber" Content="Numer mieszkania" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="Add" Content="Dodaj" HorizontalAlignment="Left" Margin="10,336,0,0" VerticalAlignment="Top" Width="75" Click="Add_Click"/>
+            <Button x:Name="Cancel" Content="Anuluj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="207,336,0,0" Click="Cancel_Click"/>
+            <TextBox x:Name="FirstNameBox" HorizontalAlignment="Left" Height="23" Margin="118,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" />
+            <TextBox x:Name="LastNameBox" HorizontalAlignment="Left" Height="23" Margin="118,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+            <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Height="23" Margin="118,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+            <TextBox x:Name="PeselBox" HorizontalAlignment="Left" Height="23" Margin="118,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="PhoneNumberBox" HorizontalAlignment="Left" Height="23" Margin="118,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="CountryBox" HorizontalAlignment="Left" Height="23" Margin="118,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+            <TextBox x:Name="CityBox" HorizontalAlignment="Left" Height="23" Margin="118,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+            <TextBox x:Name="PostalCodeBox" HorizontalAlignment="Left" Height="23" Margin="118,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="StreetBox" HorizontalAlignment="Left" Height="23" Margin="118,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+            <TextBox x:Name="BuildingNumberBox" HorizontalAlignment="Left" Height="23" Margin="118,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="ApartamentNumberBox" HorizontalAlignment="Left" Height="23" Margin="118,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159"/>
+        </Grid>
+    </Grid>
+</Window>

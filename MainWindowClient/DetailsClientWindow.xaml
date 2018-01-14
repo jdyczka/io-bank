@@ -1,0 +1,33 @@
+﻿<Window x:Class="Bank.MainWindow.DetailsClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank.MainWindow"
+        mc:Ignorable="d"
+ Title="Dane Szczegółowe Klienta" Height="400" Width="350">
+    <Grid>
+        <Button x:Name="CloseDetails" Content="Zamknij" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="135,320,0,0" Click="CloseDetails_Click"/>
+        <Label x:Name="FirstName" Content="Imię" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,0.752"/>
+        <Label x:Name="LastName" Content="Nazwisko" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Email" Content="Adres email" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Pesel" Content="Numer pesel" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Country" Content="Narodowość" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="City" Content="Miasto" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PostalCode" Content="Kod pocztowy" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Street" Content="Ulica" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="BuildingNumber" Content="Numer ulicy" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ApartamentNumber" Content="Numer mieszkania" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="FirstNameDetails" Content="" HorizontalAlignment="Left" Margin="194,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.331,0.752"/>
+        <Label x:Name="LastNameDetails" Content="Nazwisko" HorizontalAlignment="Left" Margin="194,36,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="EmailDetails" Content="Adres email" HorizontalAlignment="Left" Margin="194,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PeselDetails" Content="Numer pesel" HorizontalAlignment="Left" Margin="194,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="CountryDetails" Content="Narodowość" HorizontalAlignment="Left" Margin="194,113,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="CityDetails" Content="Miasto" HorizontalAlignment="Left" Margin="194,139,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PostalCodeDetails" Content="Kod pocztowy" HorizontalAlignment="Left" Margin="194,165,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="StreetDetails" Content="Ulica" HorizontalAlignment="Left" Margin="194,191,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="BuildingNumberDetails" Content="Numer ulicy" HorizontalAlignment="Left" Margin="194,217,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ApartamentNumberDetails" Content="Numer mieszkania" HorizontalAlignment="Left" Margin="194,243,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
