@@ -19,7 +19,7 @@ namespace Bank.DataAccess.Repositories
 
         public void addNewEmployee(Employee employee)
         {
-            _context.Employee.Add(employee);
+            _context.Employees.Add(employee);
             _context.SaveChanges();
         }
 
