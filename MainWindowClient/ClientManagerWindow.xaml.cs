@@ -16,14 +16,10 @@ using System.Windows.Shapes;
 using Bank.DataAccess;
 using Bank.DataAccess.Repositories;
 using Bank.Entities;
-<<<<<<< Updated upstream
 using System.Data.Entity;
 using IOMail;
-
-=======
 using BankProducts;
 using BankProducts.View;
->>>>>>> Stashed changes
 
 namespace Bank.MainWindow
 {
@@ -101,14 +97,6 @@ namespace Bank.MainWindow
                 ClientDataGrid.ItemsSource = null;
                 ClientDataGrid.AutoGenerateColumns = false;
                 ClientDataGrid.ItemsSource = repository.getClientList();
-<<<<<<< Updated upstream
-
-
-=======
-            }
-        }
->>>>>>> Stashed changes
-
             }
         }
 
@@ -257,14 +245,6 @@ namespace Bank.MainWindow
             if (editClientWindow.ApartamentNumberBox.Text != editedClient.Address.AppartmentNr)
                 editedClient.Address.AppartmentNr = editClientWindow.ApartamentNumberBox.Text;
         }
-<<<<<<< Updated upstream
-=======
-
-        
-    }
->>>>>>> Stashed changes
-
-
         private static void SendingEmailByTemplate(Client client, BankContext context, string subject, string templateName)
         {
             int clientId = client.Id;
