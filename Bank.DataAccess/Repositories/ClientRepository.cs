@@ -11,7 +11,6 @@ namespace Bank.DataAccess.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-
         private BankContext _context;
 
         public ClientRepository(BankContext context)

@@ -57,6 +57,7 @@
     <Compile Include="Repositories\Interfaces\IClientRepository.cs" />
     <Compile Include="Repositories\Interfaces\IEmployeeRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMessageRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
