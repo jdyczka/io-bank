@@ -64,5 +64,19 @@ namespace Bank.Entities
                             "Liczba kart:  " + Cards.Count + '\n';
             return result;
         }
+
+        public string GetSearchTags()
+        {
+            string result = FirstName + " " + LastName + " " + Pesel + " " + Email + " " + Address.City + " " + Address.Street;
+            foreach ( var a in Accounts )
+            {
+                result += " " + a.AccountNo;
+            }
+            foreach (var c in Cards)
+            {
+                result += " " + c.Id;
+            }
+            return result;
+        }
     }
 }

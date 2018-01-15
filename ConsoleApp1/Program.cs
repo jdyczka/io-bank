@@ -51,9 +51,11 @@ namespace ConsoleApp1
             {
                 var clientRepo = new ClientRepository(context);
                 var accountRepo = new AccountRepository(context);
-                
+
                 // GET CLIENT BY ID
-                Console.WriteLine( "4 " + clientRepo.getClientById(4).LastName );
+                var someClient = clientRepo.getClientById(4);
+                Console.WriteLine( "4 " + someClient.LastName );
+                Console.WriteLine( someClient.GetSearchTags() );
                 Console.WriteLine("");
 
                 // ADD CLIENT
