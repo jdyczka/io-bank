@@ -4,6 +4,8 @@ namespace Bank.Entities
 {
     public class Employee
     {
+        private static int _lastId = 0;
+
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -22,5 +24,24 @@ namespace Bank.Entities
         public bool IsSuspended { get; set; }
 
         public string Password { get; set; }
+
+        public Employee()
+        {
+            Id = _lastId;
+            _lastId++;
+            IsSuspended = false;
+        }
+
+        public Employee(string firstName, string lastName, string pesel, string email, 
+            int addressId, AuthLevel authLevel, string password) : this()
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Pesel = pesel;
+            Email = email;
+            AddressId = addressId;
+            AuthLevel = authLevel;
+            Password = password;
+        }
     }
 }

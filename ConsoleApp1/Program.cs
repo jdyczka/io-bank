@@ -26,18 +26,16 @@ namespace ConsoleApp1
             {
                 var repo = new ClientRepository(context);
 
-                Console.WriteLine( "2 " + repo.getClientById(2).LastName );
+                Console.WriteLine( "4 " + repo.getClientById(4).LastName );
                 Console.WriteLine("");
 
                 var address = new Address
                 {
-                    Id = 100,
                     Country = "Poland"
                 };
 
                 var client = new Client
                 {
-                    Id = 5,
                     FirstName = "Nowy",
                     LastName = "Klient",
                     AddressId = address.Id,
