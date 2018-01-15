@@ -16,7 +16,7 @@
                 <DataGridCheckBoxColumn  Header="Zawieszony" Binding="{Binding IsSuspended}" Width="100" CanUserResize="False" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="logoutButton" Content="Wyloguj" HorizontalAlignment="Left" Margin="686,524,0,0" VerticalAlignment="Top" Width="75" Click="logoutButton_Click"/>
+        <Button x:Name="logoutButton" Content="Powrót" HorizontalAlignment="Left" Margin="686,524,0,0" VerticalAlignment="Top" Width="75" Click="logoutButton_Click"/>
         <Button x:Name="addEmployeeButton" Content="Dodaj..." HorizontalAlignment="Left" Margin="31,524,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.173,0.4" Click="addEmployeeButton_Click"/>
         <Button x:Name="removeEmployeeButton" Content="Usuń" HorizontalAlignment="Left" Margin="129,524,0,0" VerticalAlignment="Top" Width="75" Click="removeEmployeeButton_Click"/>
         <Button x:Name="editEmployeeButton" Content="Edytuj..." HorizontalAlignment="Left" Margin="230,524,0,0" VerticalAlignment="Top" Width="75" Click="editEmployeeButton_Click"/>

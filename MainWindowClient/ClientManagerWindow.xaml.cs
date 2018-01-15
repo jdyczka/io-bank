@@ -17,9 +17,15 @@ using Bank.DataAccess;
 using Bank.DataAccess.Repositories;
 using Bank.Entities;
 using System.Data.Entity;
+using Bank.Entities.Enums;
 using IOMail;
+
 using BankProducts;
 using BankProducts.View;
+
+using Logowanie;
+
+
 
 namespace Bank.MainWindow
 {
@@ -28,8 +34,24 @@ namespace Bank.MainWindow
     /// </summary>
     public partial class ClientManagerWindow : Window
     {
+
         BankContext bankContext = null;
         ClientRepository repository = null;
+
+        public Button AdminPanelProperty
+        {
+            get { return AdminPanel; }
+            set { AdminPanel = value; }
+        }
+
+        EmployeeRepository employeeRepository;
+
+        public EmployeeRepository employeeRepositoryProperty
+        {
+            get { return employeeRepository; }
+            set { employeeRepository = value; }
+        }
+
 
         public ClientManagerWindow()
         {
@@ -40,7 +62,6 @@ namespace Bank.MainWindow
             bankContext = new BankContext();
             repository = new ClientRepository(bankContext);
 
-            AdminPanel.IsEnabled = false;
             DetailsClient.IsEnabled = false;
             EditClient.IsEnabled = false;
             ClientDataGrid.ItemsSource = repository.getClientList();
@@ -178,10 +199,13 @@ namespace Bank.MainWindow
             MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz przejść do panelu administratora?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                /*EmployeeManagerWindow employeeManagerWindow = new EmployeeManagerWindow();
-                employeeManagerWindow.employeeListProperty = employeeListProperty;
-                employeeManagerWindow.Show();
-                Close();*/
+                EmployeeManagerWindow employeeManagerWindow = new EmployeeManagerWindow();
+                employeeManagerWindow.repositoryProperty = employeeRepository;
+                employeeManagerWindow.EmployeeDataGridProperty.ItemsSource = employeeRepository.getEmployeeList();
+                if (employeeManagerWindow.ShowDialog() == true)
+                {
+                    employeeManagerWindow.Close();
+                }
             }
 
         }

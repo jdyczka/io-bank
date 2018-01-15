@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}</ProjectGuid>
+    <ProjectGuid>{07D2BC4A-FCB4-40D9-836E-62B400DFAE7C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Bank.MainWindow</RootNamespace>
-    <AssemblyName>Bank.MainWindow</AssemblyName>
+    <RootNamespace>Logowanie2</RootNamespace>
+    <AssemblyName>Logowanie2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -61,41 +61,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddClientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ClientManagerWindow.xaml">
+    <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddClientWindow.xaml.cs">
-      <DependentUpon>AddClientWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ClientManagerWindow.xaml.cs">
-      <DependentUpon>ClientManagerWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="DetailsClientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditClientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailsClientWindow.xaml.cs">
-      <DependentUpon>DetailsClientWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditClientWindow.xaml.cs">
-      <DependentUpon>EditClientWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,18 +109,9 @@
       <Project>{1738e654-f821-42e5-b616-677e868323e1}</Project>
       <Name>Bank.Entities</Name>
     </ProjectReference>
-
-    <ProjectReference Include="..\IOMail\IOMail.csproj">
-      <Project>{13b5443a-d466-4b9e-95ce-15640fbcf3bd}</Project>
-      <Name>IOMail</Name>
-	</ProjectReference>
-    <ProjectReference Include="..\BankProducts\BankProducts.csproj">
-      <Project>{ce1ae2e4-0995-41bb-9fe1-724a75a452c6}</Project>
-      <Name>BankProducts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logowanie\Logowanie.csproj">
-      <Project>{69043cdb-e18c-4d98-9bb2-942e5e6fb1d8}</Project>
-      <Name>Logowanie</Name>
+    <ProjectReference Include="..\MainWindowClient\Bank.MainWindow.csproj">
+      <Project>{e7ebcba3-5bd7-497b-8ad5-ddafb80940ce}</Project>
+      <Name>Bank.MainWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

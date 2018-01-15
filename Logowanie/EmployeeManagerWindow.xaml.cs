@@ -36,6 +36,12 @@ namespace Logowanie
             set { repository = value; }
         }
 
+        public DataGrid EmployeeDataGridProperty
+        {
+            get { return employeeDataGrid; }
+            set { employeeDataGrid = value; }
+        }
+
 
         public EmployeeManagerWindow()
         {
@@ -47,14 +53,15 @@ namespace Logowanie
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                LoginWindow loginWindow = new LoginWindow();
-                //loginWindow.employeeListProperty = employeeListProperty;
-                loginWindow.Show();
-                Close();
-            }
+            //MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    LoginWindow loginWindow = new LoginWindow();
+            //    //loginWindow.employeeListProperty = employeeListProperty;
+            //    loginWindow.Show();
+            //    Close();
+            //}
+            DialogResult = true;
         }
 
         private void removeEmployeeButton_Click(object sender, RoutedEventArgs e)
