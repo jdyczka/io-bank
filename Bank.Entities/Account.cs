@@ -10,6 +10,19 @@ namespace Bank.Entities
     {
         private ICollection<Client> _clients;
 
+        private static Random _random = new Random();
+        private string _generateAccountNo()
+        {
+            string result = "2924901044";
+            
+            for ( int i = 0; i < 2; i++ )
+            {
+                result += _random.Next(10000000, 100000000);
+            }
+            
+            return result;
+        }
+
         [Key]
         public string AccountNo { get; set; }
 
@@ -37,6 +50,7 @@ namespace Bank.Entities
 
         public Account()
         {
+            AccountNo = _generateAccountNo();
             _clients = new List<Client>();
         }
     }

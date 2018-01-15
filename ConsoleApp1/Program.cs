@@ -3,9 +3,9 @@ using System.Linq;
 using Bank.DataAccess;
 using System.Data.Entity;
 using Bank.DataAccess.Migrations;
-using Bank.DataAccess.Repositories;
 using Bank.Entities;
 using System.Collections.Generic;
+using Bank.DataAccess.Repositories;
 
 namespace ConsoleApp1
 {
@@ -24,9 +24,10 @@ namespace ConsoleApp1
         {
             using (var context = new BankContext())
             {
-                var repo = new ClientRepository(context);
+                var clientRepo = new ClientRepository(context);
+                var accountRepo = new AccountRepository(context);
 
-                Console.WriteLine( "4 " + repo.getClientById(4).LastName );
+                Console.WriteLine( "4 " + clientRepo.getClientById(4).LastName );
                 Console.WriteLine("");
 
                 var address = new Address
@@ -42,12 +43,20 @@ namespace ConsoleApp1
                     Address = address
                 };
 
-                repo.addNewClient(client);
+                clientRepo.addNewClient(client);
 
-                var clients = (List<Client>)repo.getClientList();
+                var clients = (List<Client>)clientRepo.getClientList();
                 foreach (var c in clients )
                 {
                     Console.WriteLine( c.Id.ToString() + ' ' + c.FirstName + ' ' + c.LastName);
+                }
+
+                Console.WriteLine("");
+
+                var accounts = (List<Account>)accountRepo.getAccountList();
+                foreach (var a in accounts)
+                {
+                    Console.WriteLine(a.AccountNo);
                 }
 
                 Console.WriteLine("");

@@ -45,17 +45,17 @@ namespace Bank.DataAccess
 
             var accounts = new List<Account>
             {
-                new Account { AccountNo="29249010440000320094007370", Balance=800, Currency=Currency.PLN, DateOpened=new DateTime(2010,8,18), InterestRate=4, Name="konto rozliczeniowe", Type=AccountType.Regular },
-                new Account { AccountNo="29249010440000320023546897", Balance=1000, Currency=Currency.PLN, DateOpened=new DateTime(2008,5,20), InterestRate=3, Name="konto rozliczeniowe", Type=AccountType.Regular },
-                new Account { AccountNo="29249010440000320257892354", Balance=1200, Currency=Currency.PLN, DateOpened=new DateTime(2013,11,28), InterestRate=5, Name="konto rozliczeniowe", Type=AccountType.Regular },
+                new Account { Balance=800, Currency=Currency.PLN, DateOpened=new DateTime(2010,8,18), InterestRate=4, Name="konto rozliczeniowe", Type=AccountType.Regular },
+                new Account { Balance=1000, Currency=Currency.PLN, DateOpened=new DateTime(2008,5,20), InterestRate=3, Name="konto rozliczeniowe", Type=AccountType.Regular },
+                new Account { Balance=1200, Currency=Currency.PLN, DateOpened=new DateTime(2013,11,28), InterestRate=5, Name="konto rozliczeniowe", Type=AccountType.Regular },
             };
             context.Accounts.AddOrUpdate(a => new { a.AccountNo, a.Balance, a.Currency, a.DateOpened, a.InterestRate, a.Name, a.Type }, accounts.ToArray());
 
             var cards = new List<Card>
             {
-                new Card { Id=1, AccountNo="29249010440000320094007370", ClientId=1, ExpirationDate= new DateTime(2018,9,18), Pin="0123" },
-                new Card { Id=2, AccountNo="29249010440000320023546897", ClientId=2, ExpirationDate= new DateTime(2018,5,20), Pin="1478" },
-                new Card { Id=3, AccountNo="29249010440000320257892354", ClientId=3, ExpirationDate= new DateTime(2019,11,28), Pin="2589" },
+                new Card { Id=1, ClientId=1, ExpirationDate= new DateTime(2018,9,18), Pin="0123" },
+                new Card { Id=2, ClientId=2, ExpirationDate= new DateTime(2018,5,20), Pin="1478" },
+                new Card { Id=3, ClientId=3, ExpirationDate= new DateTime(2019,11,28), Pin="2589" },
 
             };
             context.Cards.AddOrUpdate(c => new { c.Id, c.AccountNo, c.ClientId, c.ExpirationDate, c.Pin, }, cards.ToArray());
