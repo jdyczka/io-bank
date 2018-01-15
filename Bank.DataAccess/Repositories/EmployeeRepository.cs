@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace Bank.DataAccess.Repositories
 {
-    class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private BankContext _context;
 

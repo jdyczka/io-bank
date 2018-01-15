@@ -17,6 +17,12 @@ namespace ConsoleApp1
             //custom initializer (always drops and recreates)
             Database.SetInitializer(new BankDBInitializer());
             testClients();
+            testAddresses();
+            testAccounts();
+            testEmployees();
+
+            Console.WriteLine("");
+            Console.WriteLine("End");
             Console.ReadKey();
         }
 
@@ -27,9 +33,11 @@ namespace ConsoleApp1
                 var clientRepo = new ClientRepository(context);
                 var accountRepo = new AccountRepository(context);
 
+                // GET CLIENT BY ID
                 Console.WriteLine( "4 " + clientRepo.getClientById(4).LastName );
                 Console.WriteLine("");
 
+                // ADD CLIENT
                 var address = new Address
                 {
                     Country = "Poland"
@@ -45,6 +53,7 @@ namespace ConsoleApp1
 
                 clientRepo.addNewClient(client);
 
+                // GET ALL CLIENTS
                 var clients = (List<Client>)clientRepo.getClientList();
                 foreach (var c in clients )
                 {
@@ -53,19 +62,52 @@ namespace ConsoleApp1
 
                 Console.WriteLine("");
 
+                // UPDATE CLIENT
                 client.LastName = "Klient-Zmieniony";
                 clientRepo.updateClient(client);
                 Console.WriteLine( client.Id.ToString() + ' ' + clientRepo.getClientById(client.Id).FirstName + ' ' + clientRepo.getClientById(client.Id).LastName);
                 Console.WriteLine("");
+            }
+        }
+
+        private static void testEmployees()
+        {
+            using (var context = new BankContext())
+            {
+                var employeeRepo = new EmployeeRepository(context);
+                
+                Console.WriteLine("3 " + employeeRepo.getEmployeeById(3).LastName);
+                Console.WriteLine("");
+            }
+        }
+
+        private static void testAddresses()
+        {
+            using (var context = new BankContext())
+            {
+                var addressRepo = new AddressRepository(context);
+                
+                var addresses = (List<Address>)addressRepo.getAddressList();
+                foreach (var a in addresses)
+                {
+                    Console.WriteLine(a);
+                }
+                Console.WriteLine("");
+            }
+        }
+
+        private static void testAccounts()
+        {
+            using (var context = new BankContext())
+            {
+                var accountRepo = new AccountRepository(context);
 
                 var accounts = (List<Account>)accountRepo.getAccountList();
                 foreach (var a in accounts)
                 {
                     Console.WriteLine(a.AccountNo);
                 }
-
                 Console.WriteLine("");
-                Console.WriteLine("End");
             }
         }
 
