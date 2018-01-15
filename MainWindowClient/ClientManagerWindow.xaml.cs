@@ -1,31 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Bank.DataAccess;
 using Bank.DataAccess.Repositories;
 using Bank.Entities;
-using System.Data.Entity;
-using Bank.Entities.Enums;
 using IOMail;
-
-using BankProducts;
 using BankProducts.View;
-
-using Logowanie;
-
-
+using System.Collections.Generic;
 
 namespace Bank.MainWindow
 {
@@ -34,34 +16,19 @@ namespace Bank.MainWindow
     /// </summary>
     public partial class ClientManagerWindow : Window
     {
-
         BankContext bankContext = null;
         ClientRepository repository = null;
-
-        public Button AdminPanelProperty
-        {
-            get { return AdminPanel; }
-            set { AdminPanel = value; }
-        }
-
-        EmployeeRepository employeeRepository;
-
-        public EmployeeRepository employeeRepositoryProperty
-        {
-            get { return employeeRepository; }
-            set { employeeRepository = value; }
-        }
-
 
         public ClientManagerWindow()
         {
             InitializeComponent();
 
             //inicjalizacja bazy
-            Database.SetInitializer(new BankDBInitializer());
+            System.Data.Entity.Database.SetInitializer(new BankDBInitializer());
             bankContext = new BankContext();
             repository = new ClientRepository(bankContext);
 
+            AdminPanel.IsEnabled = false;
             DetailsClient.IsEnabled = false;
             EditClient.IsEnabled = false;
             ClientDataGrid.ItemsSource = repository.getClientList();
@@ -91,8 +58,7 @@ namespace Bank.MainWindow
         {
             MessageBoxResult result = MessageBox.Show("Czy chcesz wyjść z programu?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
-            Close();
-            Application.Current.Shutdown();
+                Close();
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -100,7 +66,10 @@ namespace Bank.MainWindow
             MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                DialogResult = true;
+                /* LoginWindow loginWindow = new LoginWindow();
+                 loginWindow.employeeListProperty = employeeListProperty;
+                 loginWindow.Show();
+                 Close();*/
             }
         }
 
@@ -159,23 +128,24 @@ namespace Bank.MainWindow
 
         private void AddProducts_Click(object sender, RoutedEventArgs e)
         {
-            Client editedClient = null;
+            MainProductWindow mainProductWindow = new MainProductWindow();
+            Client clientToEdit = null;
             foreach (Client client in repository.getClientList())
             {
                 if (ClientDataGrid.SelectedItem == client)
-                {
-                    editedClient = client;
-                }
+                    mainProductWindow.ClientDetailsProperty = client;
+                clientToEdit = client;
             }
-            MainProductWindow mainProductWindow = new MainProductWindow(repository, editedClient);
-            
-            if (mainProductWindow.ShowDialog() == true)
-            {
-                repository.updateClient(editedClient);
-                ClientDataGrid.ItemsSource = null;
-                ClientDataGrid.AutoGenerateColumns = false;
-                ClientDataGrid.ItemsSource = repository.getClientList();
-            }
+
+            mainProductWindow.lista = (IEnumerable<Account>)repository.getClientAccounts(clientToEdit.Id);
+
+            mainProductWindow.Show();
+            mainProductWindow.LoadClientToEdit(clientToEdit);
+            repository.updateClient(clientToEdit);
+            ClientDataGrid.ItemsSource = null;
+            ClientDataGrid.AutoGenerateColumns = false;
+            ClientDataGrid.ItemsSource = repository.getClientList();
+
         }
 
         private void ClientDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -197,13 +167,10 @@ namespace Bank.MainWindow
             MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz przejść do panelu administratora?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                EmployeeManagerWindow employeeManagerWindow = new EmployeeManagerWindow();
-                employeeManagerWindow.repositoryProperty = employeeRepository;
-                employeeManagerWindow.EmployeeDataGridProperty.ItemsSource = employeeRepository.getEmployeeList();
-                if (employeeManagerWindow.ShowDialog() == true)
-                {
-                    employeeManagerWindow.Close();
-                }
+                /*EmployeeManagerWindow employeeManagerWindow = new EmployeeManagerWindow();
+                employeeManagerWindow.employeeListProperty = employeeListProperty;
+                employeeManagerWindow.Show();
+                Close();*/
             }
 
         }
@@ -239,21 +206,18 @@ namespace Bank.MainWindow
             client.Address.Street = addClientWindow.StreetBox.Text;
             client.Address.BuildingNr = addClientWindow.BuildingNumberBox.Text;
             client.Address.AppartmentNr = addClientWindow.ApartamentNumberBox.Text;
-
-
         }
+
         private void EditClientInfo(EditClientWindow editClientWindow, Client editedClient)
         {
             if (editClientWindow.FirstNameBox.Text != editedClient.FirstName)
                 editedClient.FirstName = editClientWindow.FirstNameBox.Text;
             if (editClientWindow.LastNameBox.Text != editedClient.LastName)
                 editedClient.LastName = editClientWindow.LastNameBox.Text;
-
             if (editClientWindow.EmailBox.Text != editedClient.Email)
                 editedClient.Email = editClientWindow.EmailBox.Text;
             if (editClientWindow.PeselBox.Text != editedClient.Pesel)
                 editedClient.Pesel = editClientWindow.PeselBox.Text;
-
             if (editClientWindow.CountryBox.Text != editedClient.Address.Country)
                 editedClient.Address.Country = editClientWindow.CountryBox.Text;
             if (editClientWindow.CityBox.Text != editedClient.Address.City)
@@ -267,6 +231,7 @@ namespace Bank.MainWindow
             if (editClientWindow.ApartamentNumberBox.Text != editedClient.Address.AppartmentNr)
                 editedClient.Address.AppartmentNr = editClientWindow.ApartamentNumberBox.Text;
         }
+
         private static void SendingEmailByTemplate(Client client, BankContext context, string subject, string templateName)
         {
             int clientId = client.Id;
