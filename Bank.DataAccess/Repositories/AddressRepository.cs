@@ -17,6 +17,13 @@ namespace Bank.DataAccess.Repositories
         {
             _context = context;
         }
+
+        public void addNewAddress(Address address)
+        {
+            _context.Addresses.Add(address);
+            _context.SaveChanges();
+        }
+
         public Address getAddressById(int id)
         {
             return _context.Addresses.Where( a => a.Id == id ).FirstOrDefault();

@@ -11,6 +11,7 @@ namespace Bank.DataAccess.Repositories.Interfaces
     public interface IAddressRepository
     {
         IEnumerable getAddressList();
-        Address getAddressById( int id );
+        Address getAddressById(int id);
+        void addNewAddress(Address address);
     }
 }
