@@ -1,0 +1,4 @@
+usercreate : Witaj @Name @Surname! Zostales zarejestrowany w banku IO!
+userblock : Witaj @Name @Surname! Twoje konto zostalo zablokowane!
+accountopen : Witaj @Name @Surname! Otworzyles rachunek bankowy!
+moneytransfer : Witaj @Name @Surname! Przelano Ci hajs na konto! 
