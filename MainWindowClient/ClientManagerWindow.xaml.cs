@@ -40,7 +40,6 @@ namespace Bank.MainWindow
         {
             this.repository = repository;
             ClientDataGrid.ItemsSource = repository.getClientList();
-
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
