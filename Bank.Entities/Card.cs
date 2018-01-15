@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bank.Entities
 {
@@ -14,6 +15,7 @@ namespace Bank.Entities
 
         public string Pin { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime ExpirationDate { get; set; }
     }
 }
