@@ -57,7 +57,7 @@ namespace ConsoleApp1
                 var clients = (List<Client>)clientRepo.getClientList();
                 foreach (var c in clients )
                 {
-                    Console.WriteLine( c.Id.ToString() + ' ' + c.FirstName + ' ' + c.LastName);
+                    Console.WriteLine( c );
                 }
 
                 Console.WriteLine("");

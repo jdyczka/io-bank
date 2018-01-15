@@ -52,5 +52,17 @@ namespace Bank.Entities
             Email = email;
             AddressId = addressId;
         }
+
+        public override string ToString()
+        {
+            string result = "KLIENT NR " + Id + '\n' +
+                            FirstName + " " + LastName + '\n' +
+                            "Pesel:  " + Pesel + '\n' +
+                            "E-mail: " + Email + '\n' +
+                            "Adres:  " + Address + '\n' +
+                            "Liczba kont:  " + Accounts.Count + '\n' +
+                            "Liczba kart:  " + Cards.Count + '\n';
+            return result;
+        }
     }
 }
