@@ -12,5 +12,10 @@
             Id = _lastId;
             _lastId++;
         }
+
+        public Message( string text ) : this()
+        {
+            Text = text;
+        }
     }
 }

@@ -54,5 +54,12 @@ namespace Bank.Entities
             _clients = new List<Client>();
         }
 
+        public Account( string name, Currency currency, AccountType type, float interestRate) : this()
+        {
+            Name = name;
+            Currency = currency;
+            Type = type;
+            InterestRate = interestRate;
+        }
     }
 }

@@ -24,6 +24,14 @@ namespace Bank.Entities
         {
             Id = _lastId;
             _lastId++;
+            ExpirationDate = DateTime.Now.AddYears(3);
+        }
+
+        public Card( int clientId, string accountNo, string pin) : this()
+        {
+            ClientId = clientId;
+            AccountNo = accountNo;
+            Pin = pin;
         }
     }
 }
