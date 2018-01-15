@@ -41,6 +41,7 @@ namespace Logowanie2
         public LoginWindow()
         {
             InitializeComponent();
+            Database.SetInitializer(new BankDBInitializer());
             var context = new BankContext();
             repository = new EmployeeRepository(context);
         }
