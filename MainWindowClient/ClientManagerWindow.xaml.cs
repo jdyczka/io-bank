@@ -16,9 +16,14 @@ using System.Windows.Shapes;
 using Bank.DataAccess;
 using Bank.DataAccess.Repositories;
 using Bank.Entities;
+<<<<<<< Updated upstream
 using System.Data.Entity;
 using IOMail;
 
+=======
+using BankProducts;
+using BankProducts.View;
+>>>>>>> Stashed changes
 
 namespace Bank.MainWindow
 {
@@ -29,6 +34,7 @@ namespace Bank.MainWindow
     {
         BankContext bankContext = null;
         ClientRepository repository = null;
+
         public ClientManagerWindow()
         {
             InitializeComponent();
@@ -95,8 +101,13 @@ namespace Bank.MainWindow
                 ClientDataGrid.ItemsSource = null;
                 ClientDataGrid.AutoGenerateColumns = false;
                 ClientDataGrid.ItemsSource = repository.getClientList();
+<<<<<<< Updated upstream
 
 
+=======
+            }
+        }
+>>>>>>> Stashed changes
 
             }
         }
@@ -137,6 +148,27 @@ namespace Bank.MainWindow
                 ClientDataGrid.ItemsSource = repository.getClientList();
             }
 
+        }
+
+        private void AddProducts_Click(object sender, RoutedEventArgs e)
+        {
+            Client editedClient = null;
+            foreach (Client client in repository.getClientList())
+            {
+                if (ClientDataGrid.SelectedItem == client)
+                {
+                    editedClient = client;
+                }
+            }
+            MainProductWindow mainProductWindow = new MainProductWindow(repository, editedClient);
+            
+            if (mainProductWindow.ShowDialog() == true)
+            {
+                repository.updateClient(editedClient);
+                ClientDataGrid.ItemsSource = null;
+                ClientDataGrid.AutoGenerateColumns = false;
+                ClientDataGrid.ItemsSource = repository.getClientList();
+            }
         }
 
         private void ClientDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -225,6 +257,12 @@ namespace Bank.MainWindow
             if (editClientWindow.ApartamentNumberBox.Text != editedClient.Address.AppartmentNr)
                 editedClient.Address.AppartmentNr = editClientWindow.ApartamentNumberBox.Text;
         }
+<<<<<<< Updated upstream
+=======
+
+        
+    }
+>>>>>>> Stashed changes
 
 
         private static void SendingEmailByTemplate(Client client, BankContext context, string subject, string templateName)

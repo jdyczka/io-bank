@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -126,10 +127,6 @@
     <ProjectReference Include="..\IOMail\IOMail.csproj">
       <Project>{13b5443a-d466-4b9e-95ce-15640fbcf3bd}</Project>
       <Name>IOMail</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MainWindowClient\Bank.MainWindow.csproj">
-      <Project>{e7ebcba3-5bd7-497b-8ad5-ddafb80940ce}</Project>
-      <Name>Bank.MainWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

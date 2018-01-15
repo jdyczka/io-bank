@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankProducts.View"
         mc:Ignorable="d"
-        Title="Dodawanie karty do konta" Height="300" Width="300">
-    <Grid>
+        Title="Dodawanie karty do konta" Height="400" Width="400">
+    <Grid Name="CardData">
         <Label x:Name="NumerKonta" Content="Numer konta do przypisania karty:" HorizontalAlignment="Center" Margin="22,1,0,243"/>
         <Label x:Name="PIN" Content="PIN:" HorizontalAlignment="Center" Margin="130,140,131,104" RenderTransformOrigin="0.516,1.537"/>
 

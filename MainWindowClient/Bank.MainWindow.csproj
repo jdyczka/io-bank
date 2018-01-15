@@ -131,9 +131,15 @@
       <Project>{1738e654-f821-42e5-b616-677e868323e1}</Project>
       <Name>Bank.Entities</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
     <ProjectReference Include="..\IOMail\IOMail.csproj">
       <Project>{13b5443a-d466-4b9e-95ce-15640fbcf3bd}</Project>
       <Name>IOMail</Name>
+=======
+    <ProjectReference Include="..\BankProducts\BankProducts.csproj">
+      <Project>{ce1ae2e4-0995-41bb-9fe1-724a75a452c6}</Project>
+      <Name>BankProducts</Name>
+>>>>>>> Stashed changes
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
