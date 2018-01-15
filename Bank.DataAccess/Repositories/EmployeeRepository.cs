@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bank.Entities;
+using System.Data.Entity;
 
 namespace Bank.DataAccess.Repositories
 {
-    class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private BankContext _context;
 
@@ -40,8 +41,9 @@ namespace Bank.DataAccess.Repositories
 
         public void updateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
-            // TODO
+            _context.Employees.Attach(employee);
+            _context.Entry(employee).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

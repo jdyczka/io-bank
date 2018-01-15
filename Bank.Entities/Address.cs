@@ -28,5 +28,10 @@
             BuildingNr = buildingNr;
             AppartmentNr = appartmentNr;
         }
+
+        public override string ToString()
+        {
+            return Country + ", " + PostalCode + " " + City + ", " + Street + " " + BuildingNr + " m." + AppartmentNr;
+        }
     }
 }
