@@ -53,6 +53,11 @@ namespace ConsoleApp1
 
                 Console.WriteLine("");
 
+                client.LastName = "Klient-Zmieniony";
+                clientRepo.updateClient(client);
+                Console.WriteLine( client.Id.ToString() + ' ' + clientRepo.getClientById(client.Id).FirstName + ' ' + clientRepo.getClientById(client.Id).LastName);
+                Console.WriteLine("");
+
                 var accounts = (List<Account>)accountRepo.getAccountList();
                 foreach (var a in accounts)
                 {

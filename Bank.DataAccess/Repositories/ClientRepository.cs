@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bank.Entities;
+using System.Data.Entity;
 
 namespace Bank.DataAccess.Repositories
 {
@@ -46,8 +47,9 @@ namespace Bank.DataAccess.Repositories
 
         public void updateClient(Client client)
         {
-            throw new NotImplementedException();
-            // TODO
+            _context.Clients.Attach( client );
+            _context.Entry(client).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
