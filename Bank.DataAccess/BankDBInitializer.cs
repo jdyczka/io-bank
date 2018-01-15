@@ -28,7 +28,7 @@ namespace Bank.DataAccess
                 new Client( "Anna", "Blaszczyk", "62121055699", "ablaszczyk@onet.pl", 1 ),
                 new Client( "Cezary", "Dabrowski", "53061158976", "cezarydbr@gmail.com", 2 ),
                 new Client( "Edward", "Fronczewski", "89121051233", "efron@gmail.com", 2 ),
-                new Client( "Grazyna", "Halicka", "91030509029", "graha@wp.pl", 1 )
+                new Client( "Grazyna", "Halicka", "91030509029", "ioproject2017pl@gmail.com", 1 )
 
             };
             context.Clients.AddOrUpdate(c => new { c.Id, c.FirstName, c.LastName, c.Pesel, c.Email, c.AddressId }, clients.ToArray());

@@ -13,7 +13,7 @@ namespace IOMail.Interfaces
         ITemplateParser Parser { get; set; }
         ISender Sender { get; set; }
 
-        IEmail To(string emailAddress);
+        IEmail To(int id);
         //IEmail From(string emailAddress);
         IEmail Subject(string subject);
         IEmail Body(string body);

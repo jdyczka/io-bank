@@ -7,6 +7,10 @@ using System.Reflection;
 using System.Dynamic;
 using IOMail.Data;
 using IOMail.Interfaces;
+using System.IO;
+using Bank.Entities;
+using Bank.DataAccess.Repositories;
+using Bank.DataAccess;
 
 namespace IOMail
 {
@@ -15,47 +19,52 @@ namespace IOMail
         public EmailData Data { get; set; }
         public ITemplateParser Parser { get; set; }
         public ISender Sender { get; set; }
+        public BankContext Context { get; set; }
+        private IClientRepository ClientRepository;
 
-        public Email()
-            : this(new Parser(), new SenderSmtp())
+        public Email(BankContext context)
+            : this(new Parser(), new SenderSmtp(), new ClientRepository(context))
         {
 
         }
 
-        public Email(ITemplateParser parser, ISender sender)
-            : this(parser, sender, null)
+        public Email(ITemplateParser parser, ISender sender, IClientRepository clientRepository)
+            : this(parser, sender, clientRepository, null)
         {
 
         }
 
-        public Email(string emailAddress)
-            : this(new Parser(), new SenderSmtp(), emailAddress)
+        public Email(string emailAddress, BankContext context)
+            : this(new Parser(), new SenderSmtp(), new ClientRepository(context), emailAddress)
         {
 
         }
 
-        public Email(ITemplateParser parser, ISender sender, string emailAddress)
+        public Email(ITemplateParser parser, ISender sender, IClientRepository clientRepository, string emailAddress)
         {
             Data = new EmailData()
             {
-                FromAddress = new Address() { EmailAddress = emailAddress }
+                FromAddress = new Data.Address() { EmailAddress = emailAddress }
             };
             Parser = parser;
             Sender = sender;
+            ClientRepository = clientRepository;
         }
 
-        public IEmail To(string emailAddress)
+        public IEmail To(int id)
         {
-            Data.ToAddress = new Address(emailAddress);
+            Client client = ClientRepository.getClientById(id);
+            string emailAddress = client.Email;
+            Data.ToAddress = new Data.Address(emailAddress);
 
             return this;
         }
 
-        public static IEmail From(string emailAddress)
+        public static IEmail From(BankContext context, string emailAddress)
         {
-            var email = new Email
+            var email = new Email(context)
             {
-                Data = { FromAddress = new Address(emailAddress) }
+                Data = { FromAddress = new Data.Address(emailAddress) }
             };
 
             return email;
@@ -75,9 +84,20 @@ namespace IOMail
 
         public IEmail UseTemplate(string templatename, dynamic data)
         {
-            // TODO: Add implementation
-            //Data.Body += data.GetType().GetProperty("Name").GetValue(data, null);
-            string result = Parser.Parse(templatename, data);
+            string template = "Blad! Nie znaleziono wzorco!";
+            foreach (string line in System.IO.File.ReadAllLines(@"szablony.txt"))
+            {
+                string[] splits = line.Split(':');
+                splits[0] = splits[0].Substring(0, splits[0].Count() - 1);
+                splits[1] = splits[1].Substring(1, splits[1].Count() - 1);
+                if (splits[0] == templatename)
+                {
+                    template = splits[1];
+                    break;
+                }
+            }
+            
+            string result = Parser.Parse(template, data);
             Data.Body = result;
 
             return this;
