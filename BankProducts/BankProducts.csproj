@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E7EBCBA3-5BD7-497B-8AD5-DDAFB80940CE}</ProjectGuid>
+    <ProjectGuid>{CE1AE2E4-0995-41BB-9FE1-724A75A452C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Bank.MainWindow</RootNamespace>
-    <AssemblyName>Bank.MainWindow</AssemblyName>
+    <RootNamespace>BankProducts</RootNamespace>
+    <AssemblyName>BankProducts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,14 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,41 +54,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddClientWindow.xaml">
+    <Page Include="View\AddAccountToClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ClientManagerWindow.xaml">
+    <Page Include="View\AddCardToClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddLoanToClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainProductWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddClientWindow.xaml.cs">
-      <DependentUpon>AddClientWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ClientManagerWindow.xaml.cs">
-      <DependentUpon>ClientManagerWindow.xaml</DependentUpon>
+    <Compile Include="View\AddAccountToClientWindow.xaml.cs">
+      <DependentUpon>AddAccountToClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddCardToClientWindow.xaml.cs">
+      <DependentUpon>AddCardToClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddLoanToClientWindow.xaml.cs">
+      <DependentUpon>AddLoanToClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainProductWindow.xaml.cs">
+      <DependentUpon>MainProductWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DetailsClientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditClientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailsClientWindow.xaml.cs">
-      <DependentUpon>DetailsClientWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditClientWindow.xaml.cs">
-      <DependentUpon>EditClientWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -113,7 +106,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -134,6 +126,10 @@
     <ProjectReference Include="..\IOMail\IOMail.csproj">
       <Project>{13b5443a-d466-4b9e-95ce-15640fbcf3bd}</Project>
       <Name>IOMail</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MainWindowClient\Bank.MainWindow.csproj">
+      <Project>{e7ebcba3-5bd7-497b-8ad5-ddafb80940ce}</Project>
+      <Name>Bank.MainWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

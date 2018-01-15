@@ -8,13 +8,14 @@ using System.Collections.Generic;
 using Bank.DataAccess.Repositories;
 using IOMail;
 using Bank.Entities.Enums;
+using Bank.MainWindow;
 
 namespace ConsoleApp1
 {
     class Program
     {
         const string ourAddress = "ioproject2017pl@gmail.com";
-
+        [STAThreadAttribute]
         static void Main(string[] args)
         {
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<BankContext, Configuration>());
@@ -32,6 +33,8 @@ namespace ConsoleApp1
             var clientRepo = new ClientRepository(context);
             client = clientRepo.getClientById(4);
 
+
+            
             //EMAIL WPISANY POPRZEZ WPISANIE NAZWY WZORCA ZAWARTEGO W PLIKU CONSOLEAPP/BIN/DEBUG/SZABLONY.TXT
             testSendingEmailByTemplate(client, context, "Naglowek wysylanego maila ze wzorca", "usercreate");
 

@@ -13,8 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Bank.DataAccess;
 using Bank.DataAccess.Repositories;
 using Bank.Entities;
+using System.Data.Entity;
+using IOMail;
+
 
 namespace Bank.MainWindow
 {
@@ -23,24 +27,41 @@ namespace Bank.MainWindow
     /// </summary>
     public partial class ClientManagerWindow : Window
     {
+        BankContext bankContext = null;
         ClientRepository repository = null;
         public ClientManagerWindow()
         {
             InitializeComponent();
 
-            RemoveClient.IsEnabled = false;
+            //inicjalizacja bazy
+            Database.SetInitializer(new BankDBInitializer());
+            bankContext = new BankContext();
+            repository = new ClientRepository(bankContext);
+
+            AdminPanel.IsEnabled = false;
+            DetailsClient.IsEnabled = false;
+            EditClient.IsEnabled = false;
+            ClientDataGrid.ItemsSource = repository.getClientList();
+
+            ClientDataGrid.AutoGenerateColumns = false;
+
+        }
+        public ClientManagerWindow(ClientRepository clientRepository)
+        {
+            InitializeComponent();
+
+
             AdminPanel.IsEnabled = false;
             DetailsClient.IsEnabled = false;
             EditClient.IsEnabled = false;
 
             ClientDataGrid.AutoGenerateColumns = false;
-
+            this.repository = clientRepository;
         }
         public void SetRepository(ClientRepository repository)
         {
             this.repository = repository;
             ClientDataGrid.ItemsSource = repository.getClientList();
-
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -70,29 +91,13 @@ namespace Bank.MainWindow
                 Client client = new Client();
                 FillClientInfo(addClientWindow, client);
                 repository.addNewClient(client);
+                SendingEmailByTemplate(client, bankContext, "Witamy w IOBank", "usercreate");
                 ClientDataGrid.ItemsSource = null;
                 ClientDataGrid.AutoGenerateColumns = false;
                 ClientDataGrid.ItemsSource = repository.getClientList();
 
 
-            }
-        }
 
-        private void RemoveClient_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (Bank.Entities.Client client in repository.getClientList())
-            {
-                if (ClientDataGrid.SelectedItem == client)
-                {
-                    MessageBoxResult result = MessageBox.Show("Czy chcesz usunąć zaznaczonego klienta?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        //PO DODANIU USUWANIA KLIENTA Z BAZY ODKOMENTOWAC: 
-                        //repository.DeleteClient(client);
-                        ClientDataGrid.ItemsSource = null;
-                        ClientDataGrid.ItemsSource = repository.getClientList();
-                    }
-                }
             }
         }
 
@@ -125,7 +130,7 @@ namespace Bank.MainWindow
             {
                 EditClientInfo(editClientWindow, editedClient);
                 repository.updateClient(editedClient);
-
+                SendingEmailWrittenManually(editedClient, bankContext, "IOBank: zmiana Danych", "Witaj @Name @Surname! Twoje dane personalne zostaly zmienione");
 
                 ClientDataGrid.ItemsSource = null;
                 ClientDataGrid.AutoGenerateColumns = false;
@@ -138,13 +143,11 @@ namespace Bank.MainWindow
         {
             if (ClientDataGrid.SelectedIndex != -1)
             {
-                RemoveClient.IsEnabled = true;
                 DetailsClient.IsEnabled = true;
                 EditClient.IsEnabled = true;
             }
             else
             {
-                RemoveClient.IsEnabled = false;
                 DetailsClient.IsEnabled = false;
                 EditClient.IsEnabled = false;
             }
@@ -168,10 +171,7 @@ namespace Bank.MainWindow
             var clientListFiltered = from Client client in repository.getClientList()
                                      let foundClients = client
                                      where
-                                         foundClients.Pesel.Contains(searchTextBox.Text) ||
-                                         Regex.IsMatch(foundClients.FirstName, searchTextBox.Text, RegexOptions.IgnoreCase) ||
-                                         Regex.IsMatch(foundClients.LastName, searchTextBox.Text, RegexOptions.IgnoreCase) ||
-                                         Regex.IsMatch(foundClients.Email, searchTextBox.Text, RegexOptions.IgnoreCase)
+                                        foundClients.GetSearchTags().Contains(searchTextBox.Text)
                                      select client;
             ClientDataGrid.ItemsSource = null;
             ClientDataGrid.AutoGenerateColumns = false;
@@ -205,12 +205,12 @@ namespace Bank.MainWindow
             if (editClientWindow.FirstNameBox.Text != editedClient.FirstName)
                 editedClient.FirstName = editClientWindow.FirstNameBox.Text;
             if (editClientWindow.LastNameBox.Text != editedClient.LastName)
-                editedClient.LastName= editClientWindow.LastNameBox.Text;
+                editedClient.LastName = editClientWindow.LastNameBox.Text;
 
             if (editClientWindow.EmailBox.Text != editedClient.Email)
-                editedClient.Email= editClientWindow.EmailBox.Text;
+                editedClient.Email = editClientWindow.EmailBox.Text;
             if (editClientWindow.PeselBox.Text != editedClient.Pesel)
-                editedClient.Pesel= editClientWindow.PeselBox.Text;
+                editedClient.Pesel = editClientWindow.PeselBox.Text;
 
             if (editClientWindow.CountryBox.Text != editedClient.Address.Country)
                 editedClient.Address.Country = editClientWindow.CountryBox.Text;
@@ -219,14 +219,42 @@ namespace Bank.MainWindow
             if (editClientWindow.PostalCodeBox.Text != editedClient.Address.PostalCode)
                 editedClient.Address.PostalCode = editClientWindow.PostalCodeBox.Text;
             if (editClientWindow.StreetBox.Text != editedClient.Address.Street)
-                editedClient.Address.Street= editClientWindow.StreetBox.Text;
+                editedClient.Address.Street = editClientWindow.StreetBox.Text;
             if (editClientWindow.BuildingNumberBox.Text != editedClient.Address.BuildingNr)
                 editedClient.Address.BuildingNr = editClientWindow.BuildingNumberBox.Text;
             if (editClientWindow.ApartamentNumberBox.Text != editedClient.Address.AppartmentNr)
                 editedClient.Address.AppartmentNr = editClientWindow.ApartamentNumberBox.Text;
         }
+
+
+        private static void SendingEmailByTemplate(Client client, BankContext context, string subject, string templateName)
+        {
+            int clientId = client.Id;
+            string ourAddress = "ioproject2017pl@gmail.com";
+
+            var email = Email.From(context, ourAddress) // tutaj podajemy naszego maila - moze być na sztywno
+                .To(clientId)     // Tutaj podajemy id clienta do którego wysyłamy maila
+                .Subject(subject) // Tutaj podajemy tytul maila
+                                  //.Body("Library Test Body")
+                .UseTemplate(templateName, new { Name = client.FirstName, Surname = client.LastName }) // W pliku ConsoleApp/bin/Debug/szablony.txt są zawarte szablony maili
+                .Send();
+
+            Console.WriteLine(email.Data.Body);
+        }
+
+        private static void SendingEmailWrittenManually(Client client, BankContext context, string subject, string text)
+        {
+            int clientId = client.Id;
+            string ourAddress = "ioproject2017pl@gmail.com";
+
+            var email = Email.From(context, ourAddress)
+                .To(clientId)
+                .Subject(subject)
+                .Body(text) // Tutaj podajemy tresc wysylanego maila
+                            //.UseTemplate(templateName, new { Name = client.FirstName, Surname = client.LastName })
+                .Send();
+
+            Console.WriteLine(email.Data.Body);
+        }
     }
-
-
-
 }

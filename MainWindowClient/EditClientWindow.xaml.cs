@@ -108,7 +108,7 @@ namespace Bank.MainWindow
                 }
             }
 
-            if (PostalCodeBox.Text.Length != 5)
+            if (PostalCodeBox.Text.Length != 6)
             {
                 isDataCorrect = false;
                 wrongDataMessage += " Kod pocztowy nie składa się z 5 cyfr.";
