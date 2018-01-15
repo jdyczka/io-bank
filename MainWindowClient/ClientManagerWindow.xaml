@@ -11,22 +11,20 @@
         <Grid Name="ClientWindowElements">
             <DataGrid x:Name="ClientDataGrid" HorizontalAlignment="Left" Height="570" VerticalAlignment="Top" Width="1272" Margin="10,48,0,0" SelectionChanged="ClientDataGrid_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Imię" Binding="{Binding FirstNameProperty}" Width="150" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastNameProperty}" Width="150" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Pesel" Binding="{Binding PeselProperty}" Width="150" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding EmailProperty}" Width="150" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumberProperty}" Width="100" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Adres" Binding="{Binding AdressStringProperty}" Width="500" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="150" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="150" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Pesel" Binding="{Binding Pesel}" Width="150" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Adres" Binding="{Binding Address}" Width="500" CanUserResize="False" IsReadOnly="True"/>
 
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="AddClient" Content="Dodaj" HorizontalAlignment="Left" Margin="20,635,0,0" VerticalAlignment="Top" Width="80" Click="AddClient_Click"/>
-            <Button x:Name="RemoveClient" Content="Usuń" HorizontalAlignment="Left" Margin="120,635,0,0" VerticalAlignment="Top" Width="80" Click="RemoveClient_Click"/>
-            <Button x:Name="DetailsClient" Content="Szczegóły" HorizontalAlignment="Left" Margin="220,635,0,0" VerticalAlignment="Top" Width="80" Click="DetailsClient_Click"/>
-            <Button x:Name="AdminPanel" Content="Panel Administratora" HorizontalAlignment="Left" Margin="962,638,0,0" VerticalAlignment="Top" Width="150" Click="AdminPanel_Click"/>
-            <Button x:Name="Exit" Content="Wyjście" HorizontalAlignment="Left" Margin="1202,638,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="3.36,1.818" Click="Exit_Click"/>
-            <Button x:Name="Logout" Content="Wyloguj" HorizontalAlignment="Left" Margin="1117,638,0,0" VerticalAlignment="Top" Width="80" Click="Logout_Click" />
-            <Button x:Name="EditClient" Content="Edycja" HorizontalAlignment="Left" Margin="320,635,0,0" VerticalAlignment="Top" Width="80" Click="EditClient_Click"/>
+            <Button x:Name="DetailsClient" Content="Szczegóły" HorizontalAlignment="Left" Margin="105,635,0,0" VerticalAlignment="Top" Width="80" Click="DetailsClient_Click"/>
+            <Button x:Name="AdminPanel" Content="Panel Administratora" HorizontalAlignment="Left" Margin="962,635,0,0" VerticalAlignment="Top" Width="150" Click="AdminPanel_Click"/>
+            <Button x:Name="Exit" Content="Wyjście" HorizontalAlignment="Left" Margin="1202,635,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="3.36,1.818" Click="Exit_Click"/>
+            <Button x:Name="Logout" Content="Wyloguj" HorizontalAlignment="Left" Margin="1117,635,0,0" VerticalAlignment="Top" Width="80" Click="Logout_Click" />
+            <Button x:Name="EditClient" Content="Edycja" HorizontalAlignment="Left" Margin="190,635,0,0" VerticalAlignment="Top" Width="80" Click="EditClient_Click"/>
             <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Margin="159,13,0,0" TextChanged="searchTextBox_TextChanged"/>
             <Label Content="Szukaj:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,10,0,0"/>
         </Grid>

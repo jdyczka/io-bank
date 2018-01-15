@@ -13,8 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Bank.DataAccess;
 using Bank.DataAccess.Repositories;
 using Bank.Entities;
+using System.Data.Entity;
+using IOMail;
+
 
 namespace Bank.MainWindow
 {
@@ -23,18 +27,36 @@ namespace Bank.MainWindow
     /// </summary>
     public partial class ClientManagerWindow : Window
     {
+
         ClientRepository repository = null;
         public ClientManagerWindow()
         {
             InitializeComponent();
 
-            RemoveClient.IsEnabled = false;
+            //inicjalizacja bazy
+            Database.SetInitializer(new BankDBInitializer());
+            var context = new BankContext();
+            repository = new ClientRepository(context);
+
+            AdminPanel.IsEnabled = false;
+            DetailsClient.IsEnabled = false;
+            EditClient.IsEnabled = false;
+            ClientDataGrid.ItemsSource = repository.getClientList();
+
+            ClientDataGrid.AutoGenerateColumns = false;
+
+        }
+        public ClientManagerWindow(ClientRepository clientRepository)
+        {
+            InitializeComponent();
+
+
             AdminPanel.IsEnabled = false;
             DetailsClient.IsEnabled = false;
             EditClient.IsEnabled = false;
 
             ClientDataGrid.AutoGenerateColumns = false;
-
+            this.repository = clientRepository;
         }
         public void SetRepository(ClientRepository repository)
         {
@@ -75,24 +97,7 @@ namespace Bank.MainWindow
                 ClientDataGrid.ItemsSource = repository.getClientList();
 
 
-            }
-        }
 
-        private void RemoveClient_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (Bank.Entities.Client client in repository.getClientList())
-            {
-                if (ClientDataGrid.SelectedItem == client)
-                {
-                    MessageBoxResult result = MessageBox.Show("Czy chcesz usunąć zaznaczonego klienta?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        //PO DODANIU USUWANIA KLIENTA Z BAZY ODKOMENTOWAC: 
-                        //repository.DeleteClient(client);
-                        ClientDataGrid.ItemsSource = null;
-                        ClientDataGrid.ItemsSource = repository.getClientList();
-                    }
-                }
             }
         }
 
@@ -138,13 +143,11 @@ namespace Bank.MainWindow
         {
             if (ClientDataGrid.SelectedIndex != -1)
             {
-                RemoveClient.IsEnabled = true;
                 DetailsClient.IsEnabled = true;
                 EditClient.IsEnabled = true;
             }
             else
             {
-                RemoveClient.IsEnabled = false;
                 DetailsClient.IsEnabled = false;
                 EditClient.IsEnabled = false;
             }
@@ -168,10 +171,7 @@ namespace Bank.MainWindow
             var clientListFiltered = from Client client in repository.getClientList()
                                      let foundClients = client
                                      where
-                                         foundClients.Pesel.Contains(searchTextBox.Text) ||
-                                         Regex.IsMatch(foundClients.FirstName, searchTextBox.Text, RegexOptions.IgnoreCase) ||
-                                         Regex.IsMatch(foundClients.LastName, searchTextBox.Text, RegexOptions.IgnoreCase) ||
-                                         Regex.IsMatch(foundClients.Email, searchTextBox.Text, RegexOptions.IgnoreCase)
+                                        foundClients.GetSearchTags().Contains(searchTextBox.Text)
                                      select client;
             ClientDataGrid.ItemsSource = null;
             ClientDataGrid.AutoGenerateColumns = false;
@@ -227,6 +227,6 @@ namespace Bank.MainWindow
         }
     }
 
-
+   
 
 }
