@@ -64,8 +64,12 @@ namespace Logowanie2
                 Hide();
                 if (clientManagerWindow.ShowDialog() == true)
                 {
-                Show();
-                nameAndSurname = null;
+                    Show();
+                    nameAndSurname = null;
+                }
+                else
+                {
+                    Close();
                 }
             }
         }
