@@ -38,7 +38,8 @@ namespace Bank.DataAccess
                 new Employee( "Kamila", "Laskowska", "62121012345", "k.laskowska@iobank.pl", 3, AuthLevel.Basic, "kamila" ),
                 new Employee( "Mariusz", "Niewiadomski", "76020322556", "m.niewiadomski@iobank.pl", 3, AuthLevel.Basic, "mariusz"),
                 new Employee( "Olga", "Pietrzak", "83120445589", "o.pietrzak@iobank.pl", 4, AuthLevel.Limited, "olga"),
-                new Employee( "Robert", "Sobański", "90050624587", "r.sobanski@iobank.pl", 4, AuthLevel.Admin, "robert")
+                new Employee( "Robert", "Sobański", "90050624587", "r.sobanski@iobank.pl", 4, AuthLevel.Admin, "robert"),
+                new Employee( "Admin", "Admin", "00000000000", "admin", 4, AuthLevel.Admin, "admin")
 
             };
             context.Employees.AddOrUpdate(e => new { e.Id, e.FirstName, e.LastName, e.Pesel, e.AddressId }, employees.ToArray());
