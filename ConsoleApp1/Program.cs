@@ -106,6 +106,8 @@ namespace ConsoleApp1
                 Console.WriteLine("3 " + employeeRepo.getEmployeeById(3).LastName);
                 Console.WriteLine("");
 
+                employeeRepo.deleteEmployee(1);
+
                 var employees = (List<Employee>)employeeRepo.getEmployeeList();
                 Console.WriteLine("Liczba pracowników: " + employees.Count);
                 Console.WriteLine("");
