@@ -53,5 +53,6 @@ namespace Bank.Entities
             AccountNo = _generateAccountNo();
             _clients = new List<Client>();
         }
+
     }
 }

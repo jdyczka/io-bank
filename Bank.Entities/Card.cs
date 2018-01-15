@@ -5,6 +5,8 @@ namespace Bank.Entities
 {
     public class Card
     {
+        private static int _lastId = 0;
+
         public int Id { get; set; }
 
         public int ClientId { get; set; }
@@ -17,5 +19,11 @@ namespace Bank.Entities
 
         [Column(TypeName = "datetime2")]
         public DateTime ExpirationDate { get; set; }
+
+        public Card()
+        {
+            Id = _lastId;
+            _lastId++;
+        }
     }
 }

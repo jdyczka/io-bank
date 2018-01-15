@@ -5,6 +5,8 @@ namespace Bank.Entities
 {
     public class Transaction
     {
+        private static int _lastId = 0;
+
         public int Id { get; set; }
 
         public int SrcAccountNo { get; set; }
@@ -18,5 +20,11 @@ namespace Bank.Entities
         public Decimal Amount { get; set; }
 
         public TransactionType type { get; set; }
+
+        public Transaction()
+        {
+            Id = _lastId;
+            _lastId++;
+        }
     }
 }
