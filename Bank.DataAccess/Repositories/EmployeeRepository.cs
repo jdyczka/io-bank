@@ -34,7 +34,7 @@ namespace Bank.DataAccess.Repositories
             return _context.Employees.Where(e => e.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable getEmployeeList()
+        public List<Employee> getEmployeeList()
         {
             return _context.Employees.OrderBy(e => e.LastName).ToList();
         }

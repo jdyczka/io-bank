@@ -1,0 +1,38 @@
+﻿<Window x:Class="Logowanie.DetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Logowanie"
+        mc:Ignorable="d"
+        Title="Szczegóły" Height="410" Width="380" ResizeMode ="CanMinimize">
+    <Grid>
+        <Label Content="Imię" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pesel" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label Content="Kraj" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="Miasto" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="Kod pocztowy" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ulica" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
+        <Label Content="Numer domu" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top"/>
+        <Label Content="Numer mieszkania" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top"/>
+        <Label Content="ID" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top"/>
+        <Label Content="Poziom uprawnień" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top"/>
+        <Label Content="Zawieszony" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="firstNameLabel" Content="Label" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lastNameLabel" Content="Label" HorizontalAlignment="Left" Margin="138,36,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="peselLabel" Content="Label" HorizontalAlignment="Left" Margin="138,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="emailLabel" Content="Label" HorizontalAlignment="Left" Margin="138,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="countryLabel" Content="Label" HorizontalAlignment="Left" Margin="138,114,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="cityLabel" Content="Label" HorizontalAlignment="Left" Margin="138,140,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="postalCodeLabel" Content="Label" HorizontalAlignment="Left" Margin="138,166,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="streetLabel" Content="Label" HorizontalAlignment="Left" Margin="138,192,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="buildingNrLabel" Content="Label" HorizontalAlignment="Left" Margin="138,218,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="apartmentNrLabel" Content="Label" HorizontalAlignment="Left" Margin="138,244,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="idLabel" Content="Label" HorizontalAlignment="Left" Margin="138,287,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="authLevelLabel" Content="Label" HorizontalAlignment="Left" Margin="138,313,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="isSuspendedLabel" Content="Label" HorizontalAlignment="Left" Margin="138,340,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
