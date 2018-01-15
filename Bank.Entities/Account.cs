@@ -40,7 +40,7 @@ namespace Bank.Entities
 
         public virtual AccountType Type { get; set; }
 
-        public float InterestRate { get; set; }
+        public double InterestRate { get; set; }
 
         public virtual ICollection<Client> Clients
         {
@@ -51,10 +51,12 @@ namespace Bank.Entities
         public Account()
         {
             AccountNo = _generateAccountNo();
+            DateOpened = DateTime.Now;
+            Balance = 0;
             _clients = new List<Client>();
         }
 
-        public Account( string name, Currency currency, AccountType type, float interestRate) : this()
+        public Account( string name, Currency currency, AccountType type, double interestRate) : this()
         {
             Name = name;
             Currency = currency;

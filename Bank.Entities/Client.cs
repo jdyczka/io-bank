@@ -10,7 +10,6 @@ namespace Bank.Entities
         private ICollection<Account> _accounts;
         private ICollection<Card> _cards;
 
-        //[Key]
         public int Id { get; set; }
 
         public string FirstName { get; set; }

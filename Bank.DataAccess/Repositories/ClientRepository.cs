@@ -36,6 +36,7 @@ namespace Bank.DataAccess.Repositories
 
         public Client getClientById(int id)
         {
+
             return _context.Clients.Where(c => c.Id == id).FirstOrDefault();
         }
 

@@ -51,6 +51,15 @@ namespace Bank.DataAccess
             };
             context.Accounts.AddOrUpdate(a => new { a.AccountNo, a.Balance, a.Currency, a.DateOpened, a.InterestRate, a.Name, a.Type }, accounts.ToArray());
 
+            accounts[0].Clients.Add(clients[0]);
+            accounts[1].Clients.Add(clients[0]);
+
+            var timeDeposits = new List<TimeDeposit>
+            {
+                new TimeDeposit { AccountNo = accounts[1].AccountNo, ExpirationDate = DateTime.Now.AddMonths(3) }
+            };
+            context.TimeDeposits.AddOrUpdate(t => new { t.Id, t.AccountNo, t.ExpirationDate }, timeDeposits.ToArray());
+
             var cards = new List<Card>
             {
                 new Card { Id=1, ClientId=1, ExpirationDate= new DateTime(2018,9,18), Pin="0123" },

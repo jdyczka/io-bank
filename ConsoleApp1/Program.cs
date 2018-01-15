@@ -7,6 +7,7 @@ using Bank.Entities;
 using System.Collections.Generic;
 using Bank.DataAccess.Repositories;
 using IOMail;
+using Bank.Entities.Enums;
 
 namespace ConsoleApp1
 {
@@ -19,7 +20,10 @@ namespace ConsoleApp1
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<BankContext, Configuration>());
             //custom initializer (always drops and recreates)
             Database.SetInitializer(new BankDBInitializer());
+            testProducts();
             testClients();
+            testAddresses();
+            testEmployees();
 
             Console.WriteLine("Press key to test sending email by template");
             Console.ReadKey();
@@ -36,10 +40,7 @@ namespace ConsoleApp1
 
             //EMAIL WYSYLANY POPRZEZ WPISANIE TEKSTU WIADOMOŚCI
             testSendingEmailWrittenManually(client, context, "Naglowek wysylanego manualnie maila", "Elo elo, dotarlem do celu");
-            testAddresses();
-            testAccounts();
-            testEmployees();
-
+            
             Console.WriteLine("");
             Console.WriteLine("End");
             Console.ReadKey();
@@ -50,7 +51,7 @@ namespace ConsoleApp1
             using (var context = new BankContext())
             {
                 var clientRepo = new ClientRepository(context);
-                var accountRepo = new AccountRepository(context);
+                var accountRepo = new ProductRepository(context);
 
                 // GET CLIENT BY ID
                 var someClient = clientRepo.getClientById(4);
@@ -76,6 +77,8 @@ namespace ConsoleApp1
 
                 // GET ALL CLIENTS
                 var clients = (List<Client>)clientRepo.getClientList();
+                Console.WriteLine("Liczba klientów: " + clients.Count);
+                Console.WriteLine("");
                 foreach (var c in clients)
                 {
                     Console.WriteLine( c );
@@ -99,6 +102,10 @@ namespace ConsoleApp1
                 
                 Console.WriteLine("3 " + employeeRepo.getEmployeeById(3).LastName);
                 Console.WriteLine("");
+
+                var employees = (List<Employee>)employeeRepo.getEmployeeList();
+                Console.WriteLine("Liczba pracowników: " + employees.Count);
+                Console.WriteLine("");
             }
         }
 
@@ -117,13 +124,15 @@ namespace ConsoleApp1
             }
         }
 
-        private static void testAccounts()
+        private static void testProducts()
         {
             using (var context = new BankContext())
             {
-                var accountRepo = new AccountRepository(context);
+                var prodRepo = new ProductRepository(context);
 
-                var accounts = (List<Account>)accountRepo.getAccountList();
+                prodRepo.openAccount(1, "konto", Currency.PLN, AccountType.Regular, 0.01);
+
+                var accounts = (List<Account>)prodRepo.getAccountList();
                 foreach (var a in accounts)
                 {
                     Console.WriteLine(a.AccountNo);
