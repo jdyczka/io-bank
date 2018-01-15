@@ -52,7 +52,6 @@ namespace ConsoleApp1
                 var clientRepo = new ClientRepository(context);
                 var accountRepo = new AccountRepository(context);
                 
-                Console.WriteLine("4 " + clientRepo.getClientById(4).LastName);
                 // GET CLIENT BY ID
                 Console.WriteLine( "4 " + clientRepo.getClientById(4).LastName );
                 Console.WriteLine("");
@@ -77,7 +76,6 @@ namespace ConsoleApp1
                 var clients = (List<Client>)clientRepo.getClientList();
                 foreach (var c in clients)
                 {
-                    Console.WriteLine(c.Id.ToString() + ' ' + c.FirstName + ' ' + c.LastName);
                     Console.WriteLine( c );
                 }
 
