@@ -24,6 +24,12 @@ namespace Bank.DataAccess.Repositories
             _context.SaveChanges();
         }
 
+        public void deleteEmployee(int id)
+        {
+            getEmployeeById(id).IsSuspended = true;
+            _context.SaveChanges();
+        }
+
         public Employee getEmployeeByEmail(string email)
         {
             return _context.Employees.Where(e => e.Email == email).FirstOrDefault();
@@ -36,7 +42,7 @@ namespace Bank.DataAccess.Repositories
 
         public List<Employee> getEmployeeList()
         {
-            return _context.Employees.OrderBy(e => e.LastName).ToList();
+            return _context.Employees.Where(e => !e.IsSuspended).OrderBy(e => e.LastName).ToList();
         }
 
         public void updateEmployee(Employee employee)

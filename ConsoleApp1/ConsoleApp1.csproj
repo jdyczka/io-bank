@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\io-bank\MainWindowClient\Bank.MainWindow.csproj">
+      <Project>{e7ebcba3-5bd7-497b-8ad5-ddafb80940ce}</Project>
+      <Name>Bank.MainWindow</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bank.DataAccess\Bank.DataAccess.csproj">
       <Project>{029c9be5-5f82-44cf-b917-bcc3004c5b8f}</Project>
       <Name>Bank.DataAccess</Name>
@@ -70,10 +74,6 @@
     <ProjectReference Include="..\IOMail\IOMail.csproj">
       <Project>{13b5443a-d466-4b9e-95ce-15640fbcf3bd}</Project>
       <Name>IOMail</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MainWindowClient\Bank.MainWindow.csproj">
-      <Project>{e7ebcba3-5bd7-497b-8ad5-ddafb80940ce}</Project>
-      <Name>Bank.MainWindow</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

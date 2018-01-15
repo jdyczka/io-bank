@@ -15,5 +15,6 @@ namespace Bank.DataAccess.Repositories
         Employee getEmployeeByEmail(string email);
         void addNewEmployee(Employee employee);
         void updateEmployee(Employee employee);
+        void deleteEmployee(int id);
     }
 }
