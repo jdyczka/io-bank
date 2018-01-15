@@ -27,7 +27,7 @@ namespace Bank.MainWindow
     /// </summary>
     public partial class ClientManagerWindow : Window
     {
-
+        BankContext bankContext = null;
         ClientRepository repository = null;
         public ClientManagerWindow()
         {
@@ -35,8 +35,8 @@ namespace Bank.MainWindow
 
             //inicjalizacja bazy
             Database.SetInitializer(new BankDBInitializer());
-            var context = new BankContext();
-            repository = new ClientRepository(context);
+            bankContext = new BankContext();
+            repository = new ClientRepository(bankContext);
 
             AdminPanel.IsEnabled = false;
             DetailsClient.IsEnabled = false;
@@ -91,6 +91,7 @@ namespace Bank.MainWindow
                 Client client = new Client();
                 FillClientInfo(addClientWindow, client);
                 repository.addNewClient(client);
+                SendingEmailByTemplate(client, bankContext, "Witamy w IOBank", "usercreate");
                 ClientDataGrid.ItemsSource = null;
                 ClientDataGrid.AutoGenerateColumns = false;
                 ClientDataGrid.ItemsSource = repository.getClientList();
@@ -129,7 +130,7 @@ namespace Bank.MainWindow
             {
                 EditClientInfo(editClientWindow, editedClient);
                 repository.updateClient(editedClient);
-
+                SendingEmailWrittenManually(editedClient, bankContext, "IOBank: zmiana Danych", "Witaj @Name @Surname! Twoje dane personalne zostaly zmienione");
 
                 ClientDataGrid.ItemsSource = null;
                 ClientDataGrid.AutoGenerateColumns = false;
@@ -204,12 +205,12 @@ namespace Bank.MainWindow
             if (editClientWindow.FirstNameBox.Text != editedClient.FirstName)
                 editedClient.FirstName = editClientWindow.FirstNameBox.Text;
             if (editClientWindow.LastNameBox.Text != editedClient.LastName)
-                editedClient.LastName= editClientWindow.LastNameBox.Text;
+                editedClient.LastName = editClientWindow.LastNameBox.Text;
 
             if (editClientWindow.EmailBox.Text != editedClient.Email)
-                editedClient.Email= editClientWindow.EmailBox.Text;
+                editedClient.Email = editClientWindow.EmailBox.Text;
             if (editClientWindow.PeselBox.Text != editedClient.Pesel)
-                editedClient.Pesel= editClientWindow.PeselBox.Text;
+                editedClient.Pesel = editClientWindow.PeselBox.Text;
 
             if (editClientWindow.CountryBox.Text != editedClient.Address.Country)
                 editedClient.Address.Country = editClientWindow.CountryBox.Text;
@@ -218,14 +219,42 @@ namespace Bank.MainWindow
             if (editClientWindow.PostalCodeBox.Text != editedClient.Address.PostalCode)
                 editedClient.Address.PostalCode = editClientWindow.PostalCodeBox.Text;
             if (editClientWindow.StreetBox.Text != editedClient.Address.Street)
-                editedClient.Address.Street= editClientWindow.StreetBox.Text;
+                editedClient.Address.Street = editClientWindow.StreetBox.Text;
             if (editClientWindow.BuildingNumberBox.Text != editedClient.Address.BuildingNr)
                 editedClient.Address.BuildingNr = editClientWindow.BuildingNumberBox.Text;
             if (editClientWindow.ApartamentNumberBox.Text != editedClient.Address.AppartmentNr)
                 editedClient.Address.AppartmentNr = editClientWindow.ApartamentNumberBox.Text;
         }
+
+
+        private static void SendingEmailByTemplate(Client client, BankContext context, string subject, string templateName)
+        {
+            int clientId = client.Id;
+            string ourAddress = "ioproject2017pl@gmail.com";
+
+            var email = Email.From(context, ourAddress) // tutaj podajemy naszego maila - moze być na sztywno
+                .To(clientId)     // Tutaj podajemy id clienta do którego wysyłamy maila
+                .Subject(subject) // Tutaj podajemy tytul maila
+                                  //.Body("Library Test Body")
+                .UseTemplate(templateName, new { Name = client.FirstName, Surname = client.LastName }) // W pliku ConsoleApp/bin/Debug/szablony.txt są zawarte szablony maili
+                .Send();
+
+            Console.WriteLine(email.Data.Body);
+        }
+
+        private static void SendingEmailWrittenManually(Client client, BankContext context, string subject, string text)
+        {
+            int clientId = client.Id;
+            string ourAddress = "ioproject2017pl@gmail.com";
+
+            var email = Email.From(context, ourAddress)
+                .To(clientId)
+                .Subject(subject)
+                .Body(text) // Tutaj podajemy tresc wysylanego maila
+                            //.UseTemplate(templateName, new { Name = client.FirstName, Surname = client.LastName })
+                .Send();
+
+            Console.WriteLine(email.Data.Body);
+        }
     }
-
-   
-
 }
