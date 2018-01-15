@@ -91,7 +91,8 @@ namespace Bank.MainWindow
         {
             MessageBoxResult result = MessageBox.Show("Czy chcesz wyjść z programu?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
-                Close();
+            Close();
+            Application.Current.Shutdown();
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -99,10 +100,7 @@ namespace Bank.MainWindow
             MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                /* LoginWindow loginWindow = new LoginWindow();
-                 loginWindow.employeeListProperty = employeeListProperty;
-                 loginWindow.Show();
-                 Close();*/
+                DialogResult = true;
             }
         }
 
