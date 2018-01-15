@@ -21,53 +21,59 @@ namespace BankProducts.View
     /// </summary>
     public partial class AddAccountToClientWindow : Window
     {
-        private List<String> listaWalut = new List<String>();
-        private List<String> typyKont = new List<String>();
-        
+        private List<TextBox> textBoxes;
+
         public AddAccountToClientWindow()
         {
             InitializeComponent();
-            listaWalut.Add("Polski złoty");
-            listaWalut.Add("Euro");
-            listaWalut.Add("Dolar amerykański");
-            WalutaText.ItemsSource = listaWalut;
-
-            typyKont.Add("Regularne");
-            typyKont.Add("Złote");
-            typyKont.Add("Platynowe");
-            TypText.ItemsSource = typyKont;
+            textBoxes = new List<TextBox>();
+            foreach (TextBox tb in AccountData.Children.OfType<TextBox>())
+            {
+                textBoxes.Add(tb);
+            }
         }
 
         private void AddAccountConfirm_Click(object sender, RoutedEventArgs e)
         {
-            float rate = float.Parse(OprocentowanieText.Text);
-            Currency currency;
-            AccountType accountType;
-            if ((string)WalutaText.SelectedItem == "Polski złoty")
+            bool isDataCorrect = true;
+            string wrongDataMessage = "Niepoprawne dane!";
+            foreach (TextBox tb in textBoxes)
             {
-                currency = Currency.PLN;
+                if (tb.Text.Length <= 0)
+                {
+                    isDataCorrect = false;
+                    wrongDataMessage += " Pole " + (tb.Name.EndsWith("Box") ? (tb.Name.Substring(0, tb.Name.Length - 3)) : tb.Name) + " jest puste.";
+                }
             }
-            else if ((string)WalutaText.SelectedItem == "Euro")
+            if (NazwaKontaText.Text.Length > 20)
             {
-                currency = Currency.EUR;
+                isDataCorrect = false;
+                wrongDataMessage += " Niepoprawna nazwa";
+            }
+            if (WalutaText.SelectedIndex == -1)
+            {
+                isDataCorrect = false;
+                wrongDataMessage += " Nie wybrano waluty";
+            }
+            if (TypText.SelectedIndex == -1)
+            {
+                isDataCorrect = false;
+                wrongDataMessage += " Nie wybrano rodzaju konta.";
+            }
+            if (OprocentowanieText.Text.Length > 2)
+            {
+                isDataCorrect = false;
+                wrongDataMessage += " Błędne oprocentowanie.";
+            }
+            if (isDataCorrect == true)
+            {
+                DialogResult = true;
+                Close();
             }
             else
-                currency = Currency.USD;
-
-            if ((string)TypText.SelectedItem == "Regularne")
             {
-                accountType = AccountType.Regular;
+                MessageBox.Show(wrongDataMessage, "Błąd danych");
             }
-            else if ((string)TypText.SelectedItem == "Złote")
-            {
-                accountType = AccountType.Gold;
-            }
-            else
-                accountType = AccountType.Platinum;
-
-            Account account = new Account(NazwaKontaText.Text, currency, accountType, rate);
-            DialogResult = true;
-            Close();
         }
 
         private void CancelAddingAccount_Click(object sender, RoutedEventArgs e)

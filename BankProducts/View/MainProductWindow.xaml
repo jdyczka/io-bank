@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankProducts.View"
         mc:Ignorable="d"
-        Title="Dodawanie produktu dla klienta" Height="350" Width="525">
+        Title="Dodawanie produktu dla klienta" Height="400" Width="550">
     <Grid>
         <Grid x:Name="ClientDetails" HorizontalAlignment="Center" VerticalAlignment="Top" Height="110" Width="500" Margin="8,15,9,0" >
             <Label x:Name="FirstName" Content="Imię" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -18,12 +18,12 @@
             <Label x:Name="Pesel_Copy" Content="text" HorizontalAlignment="Left" Margin="330,72,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Grid x:Name="ChosenProductGrid" HorizontalAlignment="Center" Height="160" Width="500" VerticalAlignment="Bottom" Margin="8,0,9,15">
-            
-            <Button x:Name="AddAccount" Content="Dodaj konto" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="80" Margin="30" Click="AddAccount_Click"/>
-            <Button x:Name="AddCard" Content="Dodaj kartę" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="80" Margin="30" Click="AddCard_Click"/>
-            <Button x:Name="AddLoan" Content="Dodaj kredyt" HorizontalAlignment="Right" VerticalAlignment="Center" Width="80" Height="80" Margin="30" Click="AddLoan_Click"/>
 
-            <Button x:Name="CancelProduct" Content="Anuluj" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="80" Margin="10" Click="CancelProduct_Click"/>
+            <Button x:Name="AddAccount" Content="Dodaj konto" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Height="80" Margin="10,10,0,70" Click="AddAccount_Click"/>
+            <Button x:Name="AddCard" Content="Dodaj kartę" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140" Height="80" Margin="182,10,178,70" Click="AddCard_Click"/>
+            <Button x:Name="AddLoan" Content="Dodaj kredyt" HorizontalAlignment="Right" VerticalAlignment="Center" Width="140" Height="80" Margin="0,10,10,70" Click="AddLoan_Click"/>
+
+            <Button x:Name="CancelProduct" Content="Anuluj" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="80" Margin="10,0,0,19" Click="CancelProduct_Click"/>
         </Grid>
     </Grid>
 </Window>
