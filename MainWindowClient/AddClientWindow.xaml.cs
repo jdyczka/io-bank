@@ -32,48 +32,7 @@ namespace Bank.MainWindow
             }
 
         }
-
-        public string FirstNameProperty
-        {
-            get { return FirstNameBox.Text; }
-        }
-        public string LastNameProperty
-        {
-            get { return LastNameBox.Text; }
-        }
-        public string EmailProperty
-        {
-            get { return EmailBox.Text; }
-        }
-        public long PeselProperty
-        {
-            get { return Int64.Parse(PeselBox.Text); }
-        }
-        public string CountryProperty
-        {
-            get { return CountryBox.Text; }
-        }
-        public string CityProperty
-        {
-            get { return CityBox.Text; }
-        }
-        public string PostalCodeProperty
-        {
-            get { return PostalCodeBox.Text; }
-        }
-        public string StreetProperty
-        {
-            get { return StreetBox.Text; }
-        }
-        public string BuildingNumberProperty
-        {
-            get { return BuildingNumberBox.Text; }
-        }
-        public string ApartamentNumberProperty
-        {
-            get { return ApartamentNumberBox.Text; }
-        }
-
+        
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             bool isDataCorrect = true;
