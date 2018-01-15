@@ -23,6 +23,8 @@ namespace Bank.Entities
 
         public bool IsSuspended { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public string Password { get; set; }
 
         public Employee()
@@ -30,6 +32,7 @@ namespace Bank.Entities
             Id = _lastId;
             _lastId++;
             IsSuspended = false;
+            IsDeleted = false;
         }
 
         public Employee(string firstName, string lastName, string pesel, string email, 

@@ -26,7 +26,7 @@ namespace Bank.DataAccess.Repositories
 
         public void deleteEmployee(int id)
         {
-            getEmployeeById(id).IsSuspended = true;
+            getEmployeeById(id).IsDeleted = true;
             _context.SaveChanges();
         }
 
@@ -42,7 +42,7 @@ namespace Bank.DataAccess.Repositories
 
         public List<Employee> getEmployeeList()
         {
-            return _context.Employees.Where(e => !e.IsSuspended).OrderBy(e => e.LastName).ToList();
+            return _context.Employees.Where(e => !e.IsDeleted).OrderBy(e => e.LastName).ToList();
         }
 
         public void updateEmployee(Employee employee)
