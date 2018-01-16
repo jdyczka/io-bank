@@ -91,7 +91,8 @@ namespace Bank.MainWindow
         {
             MessageBoxResult result = MessageBox.Show("Czy chcesz wyjść z programu?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
-                Close();
+            Close();
+            Application.Current.Shutdown();
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -99,10 +100,7 @@ namespace Bank.MainWindow
             MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                /* LoginWindow loginWindow = new LoginWindow();
-                 loginWindow.employeeListProperty = employeeListProperty;
-                 loginWindow.Show();
-                 Close();*/
+                DialogResult = true;
             }
         }
 
@@ -161,23 +159,23 @@ namespace Bank.MainWindow
 
         private void AddProducts_Click(object sender, RoutedEventArgs e)
         {
-            Client editedClient = null;
+            MainProductWindow mainProductWindow = new MainProductWindow();
+            Client clientToEdit = null;
             foreach (Client client in repository.getClientList())
             {
                 if (ClientDataGrid.SelectedItem == client)
-                {
-                    editedClient = client;
-                }
+                    mainProductWindow.ClientDetailsProperty = client;
+                clientToEdit = client;
             }
-            MainProductWindow mainProductWindow = new MainProductWindow(repository, editedClient);
-            
-            if (mainProductWindow.ShowDialog() == true)
-            {
-                repository.updateClient(editedClient);
-                ClientDataGrid.ItemsSource = null;
-                ClientDataGrid.AutoGenerateColumns = false;
-                ClientDataGrid.ItemsSource = repository.getClientList();
-            }
+
+            mainProductWindow.lista = (IEnumerable<Account>)repository.getClientAccounts(clientToEdit.Id);
+
+            mainProductWindow.Show();
+            mainProductWindow.LoadClientToEdit(clientToEdit);
+            repository.updateClient(clientToEdit);
+            ClientDataGrid.ItemsSource = null;
+            ClientDataGrid.AutoGenerateColumns = false;
+            ClientDataGrid.ItemsSource = repository.getClientList();
         }
 
         private void ClientDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

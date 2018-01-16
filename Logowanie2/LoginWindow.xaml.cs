@@ -61,8 +61,16 @@ namespace Logowanie2
                 {
                     clientManagerWindow.AdminPanelProperty.IsEnabled = false;
                 }
-                clientManagerWindow.Show();
-                Close();
+                Hide();
+                if (clientManagerWindow.ShowDialog() == true)
+                {
+                    Show();
+                    nameAndSurname = null;
+                }
+                else
+                {
+                    Close();
+                }
             }
         }
 

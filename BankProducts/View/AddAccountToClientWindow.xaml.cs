@@ -67,7 +67,32 @@ namespace BankProducts.View
             }
             if (isDataCorrect == true)
             {
-                DialogResult = true;
+                float rate = float.Parse(OprocentowanieText.Text);
+                Currency currency;
+                AccountType accountType;
+                if ((string)WalutaText.SelectedItem == "Polski złoty")
+                {
+                    currency = Currency.PLN;
+                }
+                else if ((string)WalutaText.SelectedItem == "Euro")
+                {
+                    currency = Currency.EUR;
+                }
+                else
+                    currency = Currency.USD;
+
+                if ((string)TypText.SelectedItem == "Regularne")
+                {
+                    accountType = AccountType.Regular;
+                }
+                else if ((string)TypText.SelectedItem == "Złote")
+                {
+                    accountType = AccountType.Gold;
+                }
+                else
+                    accountType = AccountType.Platinum;
+                Account account = null;
+                account = new Account(NazwaKontaText.Text, currency, accountType, rate);
                 Close();
             }
             else
@@ -81,7 +106,6 @@ namespace BankProducts.View
             MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz anulować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                DialogResult = false;
                 Close();
             }         
         }
