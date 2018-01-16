@@ -5,8 +5,6 @@ namespace Bank.Entities
 {
     public class Card
     {
-        private static int _lastId = 0;
-
         public int Id { get; set; }
 
         public int ClientId { get; set; }
@@ -22,8 +20,6 @@ namespace Bank.Entities
 
         public Card()
         {
-            Id = _lastId;
-            _lastId++;
             ExpirationDate = DateTime.Now.AddYears(3);
         }
 

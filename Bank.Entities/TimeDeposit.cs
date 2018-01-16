@@ -1,14 +1,10 @@
-﻿using Bank.Entities.Enums;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bank.Entities
 {
     public class TimeDeposit
     {
-        private static int _lastId = 0;
-
         public int Id { get; set; }
 
         public string AccountNo { get; set; }
@@ -19,8 +15,6 @@ namespace Bank.Entities
 
         public TimeDeposit()
         {
-            Id = _lastId;
-            _lastId++;
         }
     }
 }

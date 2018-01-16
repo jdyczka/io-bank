@@ -31,6 +31,7 @@ namespace Bank.DataAccess
                 new Address( "Polska", "Kraków",    "30-006", "al. Adama Mickiewicza", "14", "22" )
             };
             context.Addresses.AddOrUpdate(a => new { a.Id, a.Country, a.City, a.PostalCode, a.Street, a.BuildingNr, a.AppartmentNr }, addresses.ToArray());
+            context.SaveChanges();
 
             var clients = new List<Client>
             {
@@ -42,6 +43,7 @@ namespace Bank.DataAccess
                 new Client( "Katarzyna","Borowicka",    "87031488764", "kate87@buziaczek.pl",       addresses[5].Id )
             };
             context.Clients.AddOrUpdate(c => new { c.Id, c.FirstName, c.LastName, c.Pesel, c.Email, c.AddressId }, clients.ToArray());
+            context.SaveChanges();
 
             var employees = new List<Employee>
             {
@@ -54,6 +56,7 @@ namespace Bank.DataAccess
                 new Employee( "Admin",      "Admin",        "00000000000", "admin",                     addresses[0].Id,  AuthLevel.Admin,   "admin")
             };
             context.Employees.AddOrUpdate(e => new { e.Id, e.FirstName, e.LastName, e.Pesel, e.AddressId, e.AuthLevel, e.Password }, employees.ToArray());
+            context.SaveChanges();
 
             var accounts = new List<Account>
             {
@@ -73,6 +76,7 @@ namespace Bank.DataAccess
                 new Account { Balance=57245, Currency=Currency.PLN, DateOpened=new DateTime(2012, 7,24), InterestRate=0.025,Name="konto oszczędnościowe",   Type=AccountType.Gold }
             };
             context.Accounts.AddOrUpdate(a => new { a.AccountNo, a.Balance, a.Currency, a.DateOpened, a.InterestRate, a.Name, a.Type }, accounts.ToArray());
+            context.SaveChanges();
 
             var loanAccounts = new List<Account>
             {
@@ -80,6 +84,7 @@ namespace Bank.DataAccess
                 new Account { Balance=-35000, Currency=Currency.PLN, DateOpened=new DateTime(2017,10,11), InterestRate=0.03, Name="Kredyt osobisty",         Type=AccountType.Regular }
             };
             context.Accounts.AddOrUpdate(a => new { a.AccountNo, a.Balance, a.Currency, a.DateOpened, a.InterestRate, a.Name, a.Type }, accounts.ToArray());
+            context.SaveChanges();
 
             var timeDepositAccounts = new List<Account>
             {
@@ -88,6 +93,7 @@ namespace Bank.DataAccess
                 new Account { Balance=50000, Currency=Currency.PLN, DateOpened=new DateTime(2017,12,30), InterestRate=0.035,Name="Lokata osobista",         Type=AccountType.Gold }
             };
             context.Accounts.AddOrUpdate(a => new { a.AccountNo, a.Balance, a.Currency, a.DateOpened, a.InterestRate, a.Name, a.Type }, accounts.ToArray());
+            context.SaveChanges();
 
             clients[0].Accounts.Add(accounts[0]);
             clients[0].Accounts.Add(accounts[1]);
@@ -106,6 +112,7 @@ namespace Bank.DataAccess
             clients[5].Accounts.Add(accounts[8]);
             clients[5].Accounts.Add(accounts[9]);
             clients[5].Accounts.Add(timeDepositAccounts[2]);
+            context.SaveChanges();
 
             var loans = new List<Loan>
             {
@@ -113,6 +120,7 @@ namespace Bank.DataAccess
                 new Loan { AccountNo=loanAccounts[1].AccountNo, Amount=50000, InstallmentAmount=5000, InstallmentFrequency=12, status=LoanStatus.UpToDate, NextDueDate=new DateTime(2018, 2,11) }
             };
             context.Loans.AddOrUpdate(l => new { l.Id, l.AccountNo, l.Amount, l.InstallmentAmount, l.InstallmentFrequency, l.status, l.NextDueDate }, loans.ToArray());
+            context.SaveChanges();
 
             var timeDeposits = new List<TimeDeposit>
             {
@@ -121,6 +129,7 @@ namespace Bank.DataAccess
                 new TimeDeposit { AccountNo = timeDepositAccounts[2].AccountNo, ExpirationDate = timeDepositAccounts[2].DateOpened.AddMonths(6) }
             };
             context.TimeDeposits.AddOrUpdate(t => new { t.Id, t.AccountNo, t.ExpirationDate }, timeDeposits.ToArray());
+            context.SaveChanges();
 
             var cards = new List<Card>
             {
@@ -130,6 +139,7 @@ namespace Bank.DataAccess
 
             };
             context.Cards.AddOrUpdate(c => new { c.Id, c.AccountNo, c.ClientId, c.ExpirationDate, c.Pin, }, cards.ToArray());
+            context.SaveChanges();
 
             base.Seed(context);
         }

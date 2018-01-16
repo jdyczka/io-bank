@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Bank.Entities
 {
     public class Client
     {
-        private static int _lastId = 0;
-
         private ICollection<Account> _accounts;
         private ICollection<Card> _cards;
-
+        
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -37,8 +34,6 @@ namespace Bank.Entities
 
         public Client()
         {
-            Id = _lastId;
-            _lastId++;
             _accounts = new List<Account>();
             _cards = new List<Card>();
         }

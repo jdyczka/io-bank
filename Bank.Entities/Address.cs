@@ -1,9 +1,8 @@
-﻿namespace Bank.Entities
+﻿
+namespace Bank.Entities
 {
     public class Address
     {
-        private static int _lastId = 0;
-
         public int Id { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
@@ -14,12 +13,10 @@
 
         public Address()
         {
-            Id = _lastId;
-            _lastId++;
         }
 
         public Address( string country, string city, string postalCode, 
-            string street, string buildingNr, string appartmentNr) : this()
+            string street, string buildingNr, string appartmentNr)
         {
             Country = country;
             City = city;

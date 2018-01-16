@@ -4,8 +4,6 @@ namespace Bank.Entities
 {
     public class Employee
     {
-        private static int _lastId = 0;
-
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -29,8 +27,6 @@ namespace Bank.Entities
 
         public Employee()
         {
-            Id = _lastId;
-            _lastId++;
             IsSuspended = false;
             IsDeleted = false;
         }

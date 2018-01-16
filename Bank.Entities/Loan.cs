@@ -1,13 +1,10 @@
 ﻿using System;
 using Bank.Entities.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace Bank.Entities
 {
     public class Loan
     {
-        private static int _lastId = 0;
-
         public int Id { get; set; }
 
         public string AccountNo { get; set; }
@@ -25,8 +22,6 @@ namespace Bank.Entities
 
         public Loan()
         {
-            Id = _lastId;
-            _lastId++;
         }
     }
 }

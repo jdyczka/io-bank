@@ -5,8 +5,6 @@ namespace Bank.Entities
 {
     public class Transaction
     {
-        private static int _lastId = 0;
-
         public int Id { get; set; }
 
         public string SrcAccountNo { get; set; }
@@ -23,8 +21,6 @@ namespace Bank.Entities
 
         public Transaction()
         {
-            Id = _lastId;
-            _lastId++;
             Date = DateTime.Now;
         }
 
