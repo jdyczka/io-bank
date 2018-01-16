@@ -1,4 +1,5 @@
-﻿using Bank.Entities.Enums;
+﻿using Bank.Entities;
+using Bank.Entities.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,18 +12,21 @@ namespace Bank.DataAccess.Repositories.Interfaces
     public interface IProductRepository
     {
         IEnumerable getAccountList();
-        void openAccount( int clientId, 
+        Account getAccountByNo(string accountNo);
+        string openAccount( int clientId, 
             string accountName, Currency currency, AccountType accountType, double interestRate );
         void closeAccount( string accountNo );
 
         IEnumerable getLoanList();
-        void openLoan(int clientId, 
+        Loan getLoanByNo(string accountNo);
+        string openLoan(int clientId, 
             string accountName, Currency currency, AccountType accountType, double interestRate,
             Decimal amount, Decimal inhstallmentAmount, int installmentFrequency, DateTime nextDueDate);
         void closeLoan(string accountNo);
 
         IEnumerable getTimeDepositList();
-        void openTimeDeposit(int clientId, 
+        TimeDeposit getTimeDepositByNo(string accountNo);
+        string openTimeDeposit(int clientId, 
             string accountName, Currency currency, AccountType accountType, double interestRate,
             DateTime expirationDate);
         void closeTimeDeposit(string accountNo);

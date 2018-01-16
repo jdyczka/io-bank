@@ -23,12 +23,17 @@ namespace Bank.DataAccess.Repositories
 
         public void closeLoan(string accountNo)
         {
-            throw new NotImplementedException();
+            closeAccount(accountNo);
         }
 
         public void closeTimeDeposit(string accountNo)
         {
-            throw new NotImplementedException();
+            closeAccount(accountNo);
+        }
+
+        public Account getAccountByNo(string accountNo)
+        {
+            return _context.Accounts.Where(a => a.AccountNo == accountNo).FirstOrDefault();
         }
 
         public IEnumerable getAccountList()
@@ -36,9 +41,19 @@ namespace Bank.DataAccess.Repositories
             return _context.Accounts.ToList();
         }
 
+        public Loan getLoanByNo(string accountNo)
+        {
+            return _context.Loans.Where(l => l.Account.AccountNo == accountNo).FirstOrDefault();
+        }
+
         public IEnumerable getLoanList()
         {
             return _context.Loans.ToList();
+        }
+
+        public TimeDeposit getTimeDepositByNo(string accountNo)
+        {
+            return _context.TimeDeposits.Where(t => t.Account.AccountNo == accountNo).FirstOrDefault();
         }
 
         public IEnumerable getTimeDepositList()
@@ -46,22 +61,30 @@ namespace Bank.DataAccess.Repositories
             return _context.TimeDeposits.ToList();
         }
 
-        public void openAccount(int clientId, string accountName, Currency currency, AccountType accountType, double interestRate)
+        public string openAccount(int clientId, string accountName, Currency currency, AccountType accountType, double interestRate)
         {
             var account = new Account(accountName, currency, accountType, interestRate);
             _context.Accounts.Add(account);
             _context.Clients.Where(c => c.Id == clientId).FirstOrDefault().Accounts.Add(account);
             _context.SaveChanges();
+            return account.AccountNo;
         }
 
-        public void openLoan(int clientId, string accountName, Currency currency, AccountType accountType, double interestRate, decimal amount, decimal inhstallmentAmount, int installmentFrequency, DateTime nextDueDate)
+        public string openLoan(int clientId, string accountName, Currency currency, AccountType accountType, double interestRate, 
+            decimal amount, decimal installmentAmount, int installmentFrequency, DateTime nextDueDate)
         {
-            throw new NotImplementedException();
+            var accountNo = openAccount(clientId, accountName, currency, accountType, interestRate);
+            _context.Loans.Add(new Loan { AccountNo = accountNo, Amount = amount, InstallmentAmount = installmentAmount, InstallmentFrequency = installmentFrequency, NextDueDate = nextDueDate });
+            _context.SaveChanges();
+            return accountNo;
         }
 
-        public void openTimeDeposit(int clientId, string accountName, Currency currency, AccountType accountType, double interestRate, DateTime expirationDate)
+        public string openTimeDeposit(int clientId, string accountName, Currency currency, AccountType accountType, double interestRate, DateTime expirationDate)
         {
-            throw new NotImplementedException();
+            var accountNo = openAccount(clientId, accountName, currency, accountType, interestRate);
+            _context.TimeDeposits.Add(new TimeDeposit { AccountNo = accountNo, ExpirationDate = expirationDate });
+            _context.SaveChanges();
+            return accountNo;
         }
     }
 }
