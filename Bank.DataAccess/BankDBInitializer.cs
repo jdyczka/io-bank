@@ -10,8 +10,8 @@ using Bank.Entities.Enums;
 
 namespace Bank.DataAccess
 {
-    public class BankDBInitializer : DropCreateDatabaseAlways<BankContext> 
-    //public class BankDBInitializer : CreateDatabaseIfNotExists<BankContext>
+    //public class BankDBInitializer : DropCreateDatabaseAlways<BankContext> 
+    public class BankDBInitializer : CreateDatabaseIfNotExists<BankContext>
     { 
             protected override void Seed (BankContext context)
         {
